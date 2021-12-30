@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "839140843788",
+    "project_id": "ta3le-52ad1",
+    "storage_bucket": "ta3le-52ad1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839140843788:android:f05d02d44e620cdcb0a929",
+        "android_client_info": {
+          "package_name": "com.yousef.ta3leem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839140843788-vak7hiok45nes70g8tqple9vn7l4f1rg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjg9mCB2ZOMBgEXIGzoP0VwfHJTvdvoOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839140843788-vak7hiok45nes70g8tqple9vn7l4f1rg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,2 @@
+rootProject.name = "Ta3leem"
+include ':app'
