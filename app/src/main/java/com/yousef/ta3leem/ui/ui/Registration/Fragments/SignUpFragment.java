@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.yousef.ta3leem.Data.FireBase.SignUpFireBaseAuth;
 import com.yousef.ta3leem.databinding.SignupFragmentBinding;
 
 import lombok.Setter;
@@ -49,7 +50,9 @@ public class SignUpFragment extends Fragment {
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //call the signupfirebaseauth class to add values of signup to the firebase
+                SignUpFireBaseAuth signUpFireBaseAuth = new SignUpFireBaseAuth();
+                signUpFireBaseAuth.Register(binding);
             }
         });
 

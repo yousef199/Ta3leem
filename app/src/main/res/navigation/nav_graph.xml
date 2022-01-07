@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.yousef.ta3leem.ui.ui.Registration.Fragments.RegistrationFragment"
-        android:label="RegistrationFragment" />
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_adminMainPageFragment"
+            app:destination="@id/adminMainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminMainPageFragment"
+        android:name="com.yousef.ta3leem.ui.ui.Admin.UI.AdminMainPageFragment"
+        android:label="AdminMainPageFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.yousef.ta3leem.ui.ui.Registration.Fragments.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

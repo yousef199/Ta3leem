@@ -1,11 +1,10 @@
-package com.yousef.ta3leem.Authenication.FireBase;
+package com.yousef.ta3leem.Data.FireBase;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.yousef.ta3leem.databinding.SignupFragmentBinding;
-import com.yousef.ta3leem.ui.ui.Registration.Fragments.SignUpFragment;
 
-public class SignUpFireBaseAuth extends SignUpFragment{
+public class SignUpFireBaseAuth  {
     private FirebaseDatabase rootNode;
     private DatabaseReference databaseReference;
     private String id , password , reEnterPassword;
@@ -43,10 +42,15 @@ public class SignUpFireBaseAuth extends SignUpFragment{
     //assign to id , password and reEnterPassword inside SignupFragment using the binding instance and setters
     public void assignValues(SignupFragmentBinding signupFragmentBinding){
         try {
-            SignUpFragment signUpFragment = new SignUpFragment();
-            signUpFragment.setId(signupFragmentBinding.idSignuptextinput.getEditText().getText().toString());
-            signUpFragment.setPassword(signupFragmentBinding.passwordSignuptextinput.getEditText().getText().toString());
-            signUpFragment.setReEnterPassword(signupFragmentBinding.reEnterpasswordSignuptextinput.getEditText().getText().toString());
+            //get the values from the edittexts using the binding instance passed from the sign up fragment to the signupauth
+            String id = (signupFragmentBinding.idSignuptextinput.getEditText().getText().toString());
+            String password = (signupFragmentBinding.passwordSignuptextinput.getEditText().getText().toString());
+            String reEnterPassword = (signupFragmentBinding.reEnterpasswordSignuptextinput.getEditText().getText().toString());
+
+            //assign the values locally here in this class so that we can pass them to the firebase
+            this.id = id;
+            this.password = password;
+            this.reEnterPassword = reEnterPassword;
         }
         catch (NullPointerException e) {
             System.out.println("Error assigning values in SignUpFireBaseAuth");
