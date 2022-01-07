@@ -10,7 +10,11 @@
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_adminMainPageFragment"
-            app:destination="@id/adminMainPageFragment" />
+            app:destination="@id/adminMainPageFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/adminMainPageFragment"
@@ -18,10 +22,18 @@
         android:label="AdminMainPageFragment" >
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminStudentPageFragment"
-            app:destination="@id/adminStudentPageFragment" />
+            app:destination="@id/adminStudentPageFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminTeacherPage"
-            app:destination="@id/adminTeacherPage" />
+            app:destination="@id/adminTeacherPage"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_adminMainPageFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />

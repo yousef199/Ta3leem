@@ -103,7 +103,6 @@ public class LoginFragment extends Fragment {
            }
 
            if (matchFound) {
-               Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
                new navigation().navigateToAdmin(view);
            }
            else
