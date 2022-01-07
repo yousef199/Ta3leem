@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.ui.Admin.UI;
+package com.yousef.ta3leem.ui.ui.Admin.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.yousef.ta3leem.databinding.AdminstudentspageFragmentBinding;
 import com.yousef.ta3leem.ui.ui.Admin.Dialogs.AddStudentDialog;
 
-public class StudentPageFragment extends Fragment {
+public class AdminStudentPageFragment extends Fragment {
     AdminstudentspageFragmentBinding binding;
 
     @Nullable

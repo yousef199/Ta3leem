@@ -14,10 +14,24 @@
     </fragment>
     <fragment
         android:id="@+id/adminMainPageFragment"
-        android:name="com.yousef.ta3leem.ui.ui.Admin.UI.AdminMainPageFragment"
-        android:label="AdminMainPageFragment" />
+        android:name="com.yousef.ta3leem.ui.ui.Admin.Fragments.AdminMainPageFragment"
+        android:label="AdminMainPageFragment" >
+        <action
+            android:id="@+id/action_adminMainPageFragment_to_adminStudentPageFragment"
+            app:destination="@id/adminStudentPageFragment" />
+        <action
+            android:id="@+id/action_adminMainPageFragment_to_adminTeacherPage"
+            app:destination="@id/adminTeacherPage" />
+        <action
+            android:id="@+id/action_adminMainPageFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.yousef.ta3leem.ui.ui.Registration.Fragments.LoginFragment"
-        android:label="LoginFragment" />
+        android:id="@+id/adminStudentPageFragment"
+        android:name="com.yousef.ta3leem.ui.ui.Admin.Fragments.AdminStudentPageFragment"
+        android:label="AdminStudentPageFragment" />
+    <fragment
+        android:id="@+id/adminTeacherPage"
+        android:name="com.yousef.ta3leem.ui.ui.Admin.Fragments.AdminTeacherPage"
+        android:label="AdminTeacherPage" />
 </navigation>

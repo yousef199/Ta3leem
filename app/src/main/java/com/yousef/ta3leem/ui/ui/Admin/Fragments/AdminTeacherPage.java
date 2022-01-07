@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.ui.Admin.UI;
+package com.yousef.ta3leem.ui.ui.Admin.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,16 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.yousef.ta3leem.databinding.AdminmainpageFragmentBinding;
+import com.yousef.ta3leem.databinding.AdminteacherpageFragmentBinding;
 
-public class AdminMainPageFragment extends Fragment {
-    AdminmainpageFragmentBinding binding;
-
+public class AdminTeacherPage extends Fragment {
+    AdminteacherpageFragmentBinding binding;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = AdminmainpageFragmentBinding.inflate(inflater , container , false);
+        binding = AdminteacherpageFragmentBinding.inflate(inflater , container , false);
         View view = binding.getRoot();
+
         return view;
+
     }
 }
