@@ -1,6 +1,5 @@
-package com.yousef.ta3leem.ui.ui.Registration.Fragments;
+package com.yousef.ta3leem.ui.UI.Registration.Fragments;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,14 +13,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.google.firebase.auth.AdditionalUserInfo;
 import com.yousef.ta3leem.Data.Room.Enitities.Admin;
 import com.yousef.ta3leem.R;
-import com.yousef.ta3leem.Repository.Repo;
 import com.yousef.ta3leem.databinding.LoginFragmentBinding;
-import com.yousef.ta3leem.ui.ui.Registration.ViewModels.LoginViewModel;
+import com.yousef.ta3leem.ui.UI.Registration.ViewModels.LoginViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +106,7 @@ public class LoginFragment extends Fragment {
            
        }
 
-       else if(enteredId.contains("@parent")){
+       else if(enteredId.contains("@teacher")){
 
        }
 

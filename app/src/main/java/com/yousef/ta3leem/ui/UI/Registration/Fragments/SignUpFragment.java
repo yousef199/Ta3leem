@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.ui.Registration.Fragments;
+package com.yousef.ta3leem.ui.UI.Registration.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

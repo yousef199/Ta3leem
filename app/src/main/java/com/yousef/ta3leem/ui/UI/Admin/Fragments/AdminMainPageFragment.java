@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.ui.Admin.Fragments;
+package com.yousef.ta3leem.ui.UI.Admin.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,16 +27,27 @@ public class AdminMainPageFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-       binding.studentCard.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               new navigation().adminToStudent(view);
-           }
-       });
+        clicks();
+    }
+
+    public void clicks(){
+        binding.studentCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new navigation().adminToStudent(view);
+            }
+        });
         binding.logoutCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new navigation().adminToRegistration(view);
+            }
+        });
+
+        binding.teacherCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new navigation().adminToTeacher(view);
             }
         });
     }

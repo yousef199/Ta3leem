@@ -4,5 +4,4 @@
     >
 
     <solid android:color="@color/pink_primary"/>
-    <corners android:topLeftRadius="500dp"/>
 </shape>

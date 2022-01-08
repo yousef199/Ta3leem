@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.ui.Registration.ViewModels;
+package com.yousef.ta3leem.ui.UI.Registration.ViewModels;
 
 import android.app.Application;
 

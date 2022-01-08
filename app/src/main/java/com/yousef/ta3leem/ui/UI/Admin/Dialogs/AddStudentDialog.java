@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.ui.Admin.Dialogs;
+package com.yousef.ta3leem.ui.UI.Admin.Dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,7 +10,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.yousef.ta3leem.R;

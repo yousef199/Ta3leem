@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.yousef.ta3leem.ui.ui.Registration.Fragments.RegistrationFragment"
+        android:name="com.yousef.ta3leem.ui.UI.Registration.Fragments.RegistrationFragment"
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_adminMainPageFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/adminMainPageFragment"
-        android:name="com.yousef.ta3leem.ui.ui.Admin.Fragments.AdminMainPageFragment"
+        android:name="com.yousef.ta3leem.ui.UI.Admin.Fragments.AdminMainPageFragment"
         android:label="AdminMainPageFragment" >
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminStudentPageFragment"
@@ -40,10 +40,18 @@
     </fragment>
     <fragment
         android:id="@+id/adminStudentPageFragment"
-        android:name="com.yousef.ta3leem.ui.ui.Admin.Fragments.AdminStudentPageFragment"
-        android:label="AdminStudentPageFragment" />
+        android:name="com.yousef.ta3leem.ui.UI.Admin.Fragments.AdminStudentPageFragment"
+        android:label="AdminStudentPageFragment" >
+        <action
+            android:id="@+id/action_adminStudentPageFragment_to_adminMainPageFragment"
+            app:destination="@id/adminMainPageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adminTeacherPage"
-        android:name="com.yousef.ta3leem.ui.ui.Admin.Fragments.AdminTeacherPage"
-        android:label="AdminTeacherPage" />
+        android:name="com.yousef.ta3leem.ui.UI.Admin.Fragments.AdminTeacherPageFragment"
+        android:label="AdminTeacherPage" >
+        <action
+            android:id="@+id/action_adminTeacherPage_to_adminMainPageFragment"
+            app:destination="@id/adminMainPageFragment" />
+    </fragment>
 </navigation>
