@@ -11,8 +11,9 @@ import com.yousef.ta3leem.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-//Todo:Finish the student adapter
-public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStudentRecyclerAdapter.viewHolder>  {
+
+//Todo: Finisht the Teacher adapter
+public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeacherRecyclerAdapter.viewHolder> {
 
     @NonNull
     @Override

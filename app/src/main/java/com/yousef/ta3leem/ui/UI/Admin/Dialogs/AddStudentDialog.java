@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,6 @@ import com.yousef.ta3leem.R;
 
 public class AddStudentDialog extends AppCompatDialogFragment {
     private TextInputLayout id , name;
-
 
     @NonNull
     @Override
@@ -42,6 +42,7 @@ public class AddStudentDialog extends AppCompatDialogFragment {
                 });
         id = view.findViewById(R.id.addStudentDialog_ID);
         name = view.findViewById(R.id.addStudentDialog_Name);
+
 
         return builder.create();
     }

@@ -14,6 +14,8 @@ import androidx.navigation.Navigation;
 
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.AdminteacherpageFragmentBinding;
+import com.yousef.ta3leem.ui.UI.Admin.Dialogs.AddStudentDialog;
+import com.yousef.ta3leem.ui.UI.Admin.Dialogs.AddTeacherDialog;
 
 public class AdminTeacherPageFragment extends Fragment {
     AdminteacherpageFragmentBinding binding;
@@ -45,12 +47,24 @@ public class AdminTeacherPageFragment extends Fragment {
 
     //onClicks
     private void clicks() {
+        binding.adminAddTeacherFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAddDialog();
+            }
+        });
+
         binding.adminTeachersToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
              new navigation().teacherToMainPage(view);
             }
         });
+    }
+
+    private void openAddDialog(){
+        AddTeacherDialog addTeacherDialog = new AddTeacherDialog();
+        addTeacherDialog.show(getChildFragmentManager() , "dialog");
     }
 
     private class navigation {

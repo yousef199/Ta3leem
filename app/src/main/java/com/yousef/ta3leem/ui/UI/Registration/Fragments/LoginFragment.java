@@ -9,11 +9,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.yousef.ta3leem.Data.FireBase.CallBacks.teacherFireBaseCallBack;
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
+import com.yousef.ta3leem.Data.FireBase.CallBacks.allTeachersFirebaseCallBack;
+import com.yousef.ta3leem.Data.FireBase.Get;
 import com.yousef.ta3leem.Data.Room.Enitities.Admin;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.LoginFragmentBinding;
@@ -26,6 +32,7 @@ public class LoginFragment extends Fragment {
     float v = 0;
     LoginFragmentBinding binding;
     List<Admin> allAdmins = new ArrayList<>();
+    LoginViewModel loginViewModel;
 
     @Nullable
     @Override
@@ -48,7 +55,7 @@ public class LoginFragment extends Fragment {
         binding.logInforgotPasswordTextView.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
         binding.logInButton.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
 
-        LoginViewModel loginViewModel  = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+        loginViewModel  = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
         loginViewModel.getAllAdmins().observe(getViewLifecycleOwner(), new Observer<List<Admin>>() {
             @Override
             public void onChanged(List<Admin> admins) {
@@ -62,6 +69,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
+
         return view;
     }
 
@@ -82,9 +90,8 @@ public class LoginFragment extends Fragment {
        String enteredId = binding.idTextinput.getEditText().getText().toString();
        String enteredPassword = binding.passwordTextinput.getEditText().getText().toString();
 
-       if(enteredId.contains("@admin")){
-           int index = enteredId.indexOf("@");
-           String extractedID = enteredId.substring(0 , index);
+        if(enteredId.contains("@admin")){
+           String extractedID = extractID(enteredId);
            boolean matchFound = false;
            
            //iterate through the admins in the database and find a match
@@ -106,9 +113,8 @@ public class LoginFragment extends Fragment {
            
        }
 
-       else if(enteredId.contains("@teacher")){
-
-       }
+       else if(enteredId.contains("@teacher")) {
+        }
 
        else{
 
@@ -121,5 +127,11 @@ public class LoginFragment extends Fragment {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_registrationFragment_to_adminMainPageFragment);
         }
+    }
+
+    public String extractID(String id){
+        int index = id.indexOf("@");
+        String extractedID = id.substring(0 , index);
+        return extractedID;
     }
 }
