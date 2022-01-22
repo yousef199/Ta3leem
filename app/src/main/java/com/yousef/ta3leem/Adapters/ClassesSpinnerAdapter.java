@@ -1,6 +1,7 @@
 package com.yousef.ta3leem.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,23 +10,24 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Helper.StateVO;
 import com.yousef.ta3leem.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends ArrayAdapter<StateVO> {
+public class ClassesSpinnerAdapter extends ArrayAdapter<StateVO> {
     private Context mContext;
     private ArrayList<StateVO> listState;
-    private MyAdapter myAdapter;
+    private ClassesSpinnerAdapter subjectsSpinnerAdapter;
     private boolean isFromView = false;
 
-    public MyAdapter(Context context, int resource, List<StateVO> objects) {
+    public ClassesSpinnerAdapter(Context context, int resource, List<StateVO> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.listState = (ArrayList<StateVO>) objects;
-        this.myAdapter = this;
+        this.subjectsSpinnerAdapter = this;
     }
 
     @Override
@@ -45,7 +47,7 @@ public class MyAdapter extends ArrayAdapter<StateVO> {
         final ViewHolder holder;
         if (convertView == null) {
             LayoutInflater layoutInflator = LayoutInflater.from(mContext);
-            convertView = layoutInflator.inflate(R.layout.teacherspinner, null);
+            convertView = layoutInflator.inflate(R.layout.subjectsdropdownlistdesign, null);
             holder = new ViewHolder();
             holder.mTextView = (TextView) convertView
                     .findViewById(R.id.text);
@@ -78,10 +80,27 @@ public class MyAdapter extends ArrayAdapter<StateVO> {
                 if (!isFromView) {
                     listState.get(position).setSelected(isChecked);
                 }
+                //Placing the checked checkbox in shared preferences
+                if(listState.get(position).isSelected()){
+                    SharedPreferences sharedPreferences = mContext.getSharedPreferences(Constants.CLASSES_PREF,Context.MODE_PRIVATE );
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(listState.get(position).getTitle() , listState.get(position).getTitle());
+                    editor.apply();
+                }
+                else{
+                    SharedPreferences sharedPreferences = mContext.getSharedPreferences(Constants.CLASSES_PREF, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.remove(listState.get(position).getTitle());
+                    editor.apply();
+                }
+
+
             }
         });
         return convertView;
     }
+
+
 
     private class ViewHolder {
         private TextView mTextView;

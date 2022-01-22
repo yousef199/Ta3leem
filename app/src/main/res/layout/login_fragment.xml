@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -13,8 +14,9 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="20dp"
     android:layout_marginEnd="10dp"
-    android:hint="id"
+    android:hint="الرقم"
     app:layout_constraintEnd_toEndOf="parent"
+    android:layoutDirection="rtl"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -34,7 +36,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         app:passwordToggleEnabled="true"
-        android:hint="password"
+        android:hint="كلمة المرور"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +57,8 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:background="@drawable/button_bg"
-        android:text="Sign-in"
+        android:text="تسجيل الدخول"
+        android:textSize="17sp"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,12 +71,12 @@
         android:id="@+id/logInforgotPasswordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="13dp"
+        android:layout_marginStart="13dp"
         android:elevation="10dp"
-        android:text="forgot password"
+        android:text="نسيت كلمة المرور؟"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/logInButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_textinput"
         app:layout_constraintVertical_bias="0.17000002" />
 </androidx.constraintlayout.widget.ConstraintLayout>

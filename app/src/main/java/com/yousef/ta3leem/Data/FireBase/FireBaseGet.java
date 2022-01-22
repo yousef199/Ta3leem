@@ -22,7 +22,9 @@ import com.yousef.ta3leem.Data.FireBase.CallBacks.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Get {
+
+//Todo: Modify the get teacher methods according to the new changes in the schema
+public class FireBaseGet {
     private boolean exits;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference dataBase;
@@ -57,9 +59,9 @@ public class Get {
         Query getTeacher = dataBase.orderByChild("id").equalTo(id);
 
         getTeacher.addListenerForSingleValueEvent(new ValueEventListener() {
-            Teacher teacher = new Teacher();
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Teacher teacher = new Teacher();
                 if(snapshot.exists()) {
                     teacher = snapshot.child(id).getValue(Teacher.class);
                     exits = true;

@@ -44,8 +44,8 @@ public class RegistrationFragment extends Fragment {
         tabLayout = binding.tabLayout;
 
         //Setting up the viewPager
-        tabLayout.addTab(tabLayout.newTab().setText("Login"));
-        tabLayout.addTab(tabLayout.newTab().setText("SignUp"));
+        tabLayout.addTab(tabLayout.newTab().setText("تسجيل دخول"));
+        tabLayout.addTab(tabLayout.newTab().setText("تسجيل مستخدم"));
 
         FragmentManager fm = getChildFragmentManager();
 

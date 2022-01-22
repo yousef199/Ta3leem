@@ -7,8 +7,7 @@ import java.util.List;
 
 public class Teacher implements Cloneable{
     String name , id , age , password = "not set";
-    List <String> subjects= new ArrayList<>();
-    List <String> classes = new ArrayList<>();
+    List<ClassesSubjects> classesSubjectsList = new ArrayList<>();
 
     public Teacher() {
     }
@@ -17,17 +16,14 @@ public class Teacher implements Cloneable{
         this.name = teacher.name;
         this.age = teacher.age;
         this.id = teacher.id;
-        this.subjects = teacher.subjects;
-        this.classes = teacher.classes;
         this.password = teacher.password;
     }
 
-    public Teacher(String name, String id, String age , List<String> subjects , List<String> classes ) {
+    public Teacher(String name, String id, String age , List<ClassesSubjects> classesSubjectsList) {
         this.name = name;
         this.id = id;
         this.age = age;
-        this.subjects = subjects;
-        this.classes = classes;
+        this.classesSubjectsList = classesSubjectsList;
     }
 
     public String getName() {
@@ -52,22 +48,6 @@ public class Teacher implements Cloneable{
 
     public void setAge(String age) {
         this.age = age;
-    }
-
-    public List<String> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(List<String> subjects) {
-        this.subjects = subjects;
-    }
-
-    public List<String> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(List<String> classes) {
-        this.classes = classes;
     }
 
     public String getPassword() {

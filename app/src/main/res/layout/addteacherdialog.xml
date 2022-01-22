@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addTeacherDialog_ID"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="id"
-        android:elevation="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        android:elevation="8dp"
+        android:layoutDirection="rtl"
+        android:hint="الرقم"
+        app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/addTeacherDialog_Name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Name"
+        android:hint="الاسم"
+        android:layoutDirection="rtl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:elevation="8dp"
@@ -38,18 +44,89 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/teacherSpinner"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addTeacherDialog_Age"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:elevation="8dp"
+        android:layoutDirection="rtl"
+        android:hint="العمر"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTeacherDialog_Name" />
+        app:layout_constraintTop_toBottomOf="@+id/addTeacherDialog_Name">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/teacherSubjectTextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addClassAndSubjects"
+        app:layout_constraintTop_toBottomOf="@+id/teacherClassesTextInput">
+
+        <AutoCompleteTextView
+            android:id="@+id/subjectsAutoCompleteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:layout_weight="1"
+            android:text="المواد"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/teacherClassesTextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addClassAndSubjects"
+        app:layout_constraintTop_toBottomOf="@+id/addTeacherDialog_Age">
+
+        <AutoCompleteTextView
+            android:id="@+id/classesAutoCompleteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:layout_weight="1"
+            android:text="الصف"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/addClassAndSubjects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:text="اضافه"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addTeacherDialog_Age" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

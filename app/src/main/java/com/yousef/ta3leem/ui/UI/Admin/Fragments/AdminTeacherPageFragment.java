@@ -2,6 +2,8 @@ package com.yousef.ta3leem.ui.UI.Admin.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.AdminteacherpageFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Admin.Dialogs.AddStudentDialog;
@@ -37,12 +40,21 @@ public class AdminTeacherPageFragment extends Fragment {
         clicks();
     }
 
+
     //Setting the toolbar
     private void toolbarSetup(){
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         appCompatActivity.setSupportActionBar(binding.adminTeachersToolBar);
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        appCompatActivity.getSupportActionBar().setTitle(Constants.TEACHER_PAGE_TITLE);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu , menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     //onClicks

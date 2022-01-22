@@ -9,17 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.yousef.ta3leem.Data.FireBase.CallBacks.teacherFireBaseCallBack;
-import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
-import com.yousef.ta3leem.Data.FireBase.CallBacks.allTeachersFirebaseCallBack;
-import com.yousef.ta3leem.Data.FireBase.Get;
+import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.Room.Enitities.Admin;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.LoginFragmentBinding;
@@ -30,6 +25,7 @@ import java.util.List;
 
 public class LoginFragment extends Fragment {
     float v = 0;
+    String enteredId ,enteredPassword;
     LoginFragmentBinding binding;
     List<Admin> allAdmins = new ArrayList<>();
     LoginViewModel loginViewModel;
@@ -39,37 +35,9 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = LoginFragmentBinding.inflate(inflater , container , false);
         View view = binding.getRoot();
-
-        binding.idTextinput.setTranslationX(800);
-        binding.passwordTextinput.setTranslationX(800);
-        binding.logInforgotPasswordTextView.setTranslationX(800);
-        binding.logInButton.setTranslationX(800);
-
-        binding.idTextinput.setAlpha(v);
-        binding.passwordTextinput.setAlpha(v);
-        binding.logInforgotPasswordTextView.setAlpha(v);
-        binding.logInButton.setAlpha(v);
-
-        binding.idTextinput.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
-        binding.passwordTextinput.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
-        binding.logInforgotPasswordTextView.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
-        binding.logInButton.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
-
         loginViewModel  = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
-        loginViewModel.getAllAdmins().observe(getViewLifecycleOwner(), new Observer<List<Admin>>() {
-            @Override
-            public void onChanged(List<Admin> admins) {
-                for (Admin a : admins) {
-                    try {
-                        allAdmins.add((Admin) a.clone());
-                    } catch (CloneNotSupportedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        });
-
+        animation();
+        getAllAdmins();
         return view;
     }
 
@@ -87,8 +55,8 @@ public class LoginFragment extends Fragment {
 
     public void  AuthenticateUser(View view) {
 //       Repo repo = new Repo(getActivity().getApplication());
-       String enteredId = binding.idTextinput.getEditText().getText().toString();
-       String enteredPassword = binding.passwordTextinput.getEditText().getText().toString();
+        getFields();
+        setEmptyFieldError();
 
         if(enteredId.contains("@admin")){
            String extractedID = extractID(enteredId);
@@ -116,10 +84,11 @@ public class LoginFragment extends Fragment {
        else if(enteredId.contains("@teacher")) {
         }
 
-       else{
+       else if(enteredId.length() !=0){
 
         }
-
+       else if (!enteredId.equals("") &&!enteredPassword.equals(""))
+            Toast.makeText(getActivity(), "Wrong Username or Password", Toast.LENGTH_SHORT).show();
     }
 
     class navigation {
@@ -129,9 +98,68 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    public void getFields() {
+    enteredId =binding.idTextinput.getEditText().getText().toString();
+    enteredPassword =binding.passwordTextinput.getEditText().getText().toString();
+    }
+
+    public void setEmptyFieldError(){
+        if(enteredId.equals("")){
+            binding.idTextinput.setError(Constants.EMPTY_FIELD_ERROR_MESSAGE);
+            binding.idTextinput.setErrorEnabled(true);
+        }
+        else {
+            binding.idTextinput.setError(null);
+            binding.idTextinput.setErrorEnabled(false);
+        }
+
+        if(enteredId.equals("")){
+            binding.passwordTextinput.setError(Constants.EMPTY_FIELD_ERROR_MESSAGE);
+            binding.passwordTextinput.setErrorEnabled(true);
+        }
+        else {
+            binding.passwordTextinput.setError(null);
+            binding.passwordTextinput.setErrorEnabled(false);
+        }
+
+    }
+
     public String extractID(String id){
         int index = id.indexOf("@");
         String extractedID = id.substring(0 , index);
         return extractedID;
+    }
+
+    public void animation(){
+        binding.idTextinput.setTranslationX(800);
+        binding.passwordTextinput.setTranslationX(800);
+        binding.logInforgotPasswordTextView.setTranslationX(800);
+        binding.logInButton.setTranslationX(800);
+
+        binding.idTextinput.setAlpha(v);
+        binding.passwordTextinput.setAlpha(v);
+        binding.logInforgotPasswordTextView.setAlpha(v);
+        binding.logInButton.setAlpha(v);
+
+        binding.idTextinput.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(300).start();
+        binding.passwordTextinput.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
+        binding.logInforgotPasswordTextView.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(500).start();
+        binding.logInButton.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
+    }
+
+    public void getAllAdmins(){
+        loginViewModel.getAllAdmins().observe(getViewLifecycleOwner(), new Observer<List<Admin>>() {
+            @Override
+            public void onChanged(List<Admin> admins) {
+                for (Admin a : admins) {
+                    try {
+                        allAdmins.add((Admin) a.clone());
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
     }
 }

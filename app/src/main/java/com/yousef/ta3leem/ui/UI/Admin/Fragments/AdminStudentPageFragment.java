@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.AdminstudentspageFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Admin.Dialogs.AddStudentDialog;
@@ -43,6 +44,7 @@ public class AdminStudentPageFragment extends Fragment {
         appCompatActivity.setSupportActionBar(binding.adminStudentsToolBar);
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        appCompatActivity.getSupportActionBar().setTitle(Constants.STUDENT_PAGE_TITLE);
 
     }
 
@@ -55,6 +57,7 @@ public class AdminStudentPageFragment extends Fragment {
             }
         });
 
+        //Toolbar backward navigation
         binding.adminStudentsToolBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +77,5 @@ public class AdminStudentPageFragment extends Fragment {
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_adminStudentPageFragment_to_adminMainPageFragment);
         }
-
     }
 }
