@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,12 +18,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.yousef.ta3leem.Adapters.ClassesSpinnerAdapter;
 import com.yousef.ta3leem.Adapters.SubjectsSpinnerAdapter;
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesSubjects;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
-import com.yousef.ta3leem.Helper.StateVO;
+import com.yousef.ta3leem.Helper.DropDownListObject;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.Repository.Repo;
 
@@ -117,12 +115,12 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
 
     // Assign the options from the list and assign the adapter
     private void initializeSubjectsDropDownList(){
-        ArrayList<StateVO> listVOs = new ArrayList<>();
+        ArrayList<DropDownListObject> listVOs = new ArrayList<>();
         for (int i = 0; i < Constants.SUBJECTS.length; i++) {
-            StateVO stateVO = new StateVO();
-            stateVO.setTitle(Constants.SUBJECTS[i]);
-            stateVO.setSelected(false);
-            listVOs.add(stateVO);
+            DropDownListObject dropDownListObject = new DropDownListObject();
+            dropDownListObject.setTitle(Constants.SUBJECTS[i]);
+            dropDownListObject.setSelected(false);
+            listVOs.add(dropDownListObject);
         }
         SubjectsSpinnerAdapter subjectsSpinnerAdapter = new SubjectsSpinnerAdapter(getActivity(), 0,
                 listVOs);

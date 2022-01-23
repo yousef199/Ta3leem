@@ -27,7 +27,7 @@ public class FireBaseAdd {
 
     public void addClassesToTeacher(String id, List<ClassesSubjects> classes) {
         for (ClassesSubjects s : classes){
-            dataBase = FirebaseDatabase.getInstance().getReference(Constants.TEACHER_FIREBASE_NAME).child(id).child(s.getClassName());
+            dataBase = FirebaseDatabase.getInstance().getReference(Constants.TEACHER_FIREBASE_NAME).child(id).child("classes").child(s.getClassName());
             dataBase.setValue(s);
         }
     }

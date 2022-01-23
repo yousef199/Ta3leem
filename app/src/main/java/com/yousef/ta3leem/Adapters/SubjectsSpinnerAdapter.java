@@ -11,22 +11,22 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.yousef.ta3leem.Constants;
-import com.yousef.ta3leem.Helper.StateVO;
+import com.yousef.ta3leem.Helper.DropDownListObject;
 import com.yousef.ta3leem.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectsSpinnerAdapter extends ArrayAdapter<StateVO> {
+public class SubjectsSpinnerAdapter extends ArrayAdapter<DropDownListObject> {
     private Context mContext;
-    private ArrayList<StateVO> listState;
+    private ArrayList<DropDownListObject> listState;
     private SubjectsSpinnerAdapter subjectsSpinnerAdapter;
     private boolean isFromView = false;
 
-    public SubjectsSpinnerAdapter(Context context, int resource, List<StateVO> objects) {
+    public SubjectsSpinnerAdapter(Context context, int resource, List<DropDownListObject> objects) {
         super(context, resource, objects);
         this.mContext = context;
-        this.listState = (ArrayList<StateVO>) objects;
+        this.listState = (ArrayList<DropDownListObject>) objects;
         this.subjectsSpinnerAdapter = this;
     }
 
@@ -100,7 +100,7 @@ public class SubjectsSpinnerAdapter extends ArrayAdapter<StateVO> {
         return convertView;
     }
 
-    public ArrayList<StateVO> getListState() {
+    public ArrayList<DropDownListObject> getListState() {
         return listState;
     }
 

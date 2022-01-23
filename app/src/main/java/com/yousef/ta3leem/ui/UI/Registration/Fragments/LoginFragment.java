@@ -84,19 +84,17 @@ public class LoginFragment extends Fragment {
        else if(enteredId.contains("@teacher")) {
         }
 
-       else if(enteredId.length() !=0){
+//       //for the student
+//       else if(enteredId.length() !=0){
+//
+//        }
+//       else if (!enteredId.equals("") &&!enteredPassword.equals(""))
+//            Toast.makeText(getActivity(), "Wrong Username or Password", Toast.LENGTH_SHORT).show();
 
-        }
-       else if (!enteredId.equals("") &&!enteredPassword.equals(""))
-            Toast.makeText(getActivity(), "Wrong Username or Password", Toast.LENGTH_SHORT).show();
+       else
+           new navigation().navigateToStudent(view);
     }
 
-    class navigation {
-        public void navigateToAdmin(View view){
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_registrationFragment_to_adminMainPageFragment);
-        }
-    }
 
     public void getFields() {
     enteredId =binding.idTextinput.getEditText().getText().toString();
@@ -161,5 +159,16 @@ public class LoginFragment extends Fragment {
 
             }
         });
+    }
+
+    class navigation {
+        public void navigateToAdmin(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_registrationFragment_to_adminMainPageFragment);
+        }
+        public void navigateToStudent(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_registrationFragment_to_studentMainPage);
+        }
     }
 }

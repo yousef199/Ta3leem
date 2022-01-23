@@ -1,6 +1,6 @@
 package com.yousef.ta3leem.Helper;
 
-public class StateVO {
+public class DropDownListObject {
     private String title;
     private boolean selected;
 

@@ -19,4 +19,12 @@
         <item name="fontFamily">@font/cairo_regular</item>
         <item name="android:layoutDirection">rtl</item>
     </style>
+
+    <style name="bold_text">
+        <item name="fontFamily">@font/cairo_bold</item>
+    </style>
+    <style name="semi_bold_text">
+        <item name="fontFamily">@font/cairo_bold</item>
+    </style>
+
 </resources>
