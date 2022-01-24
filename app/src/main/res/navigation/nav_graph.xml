@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_adminMainPageFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/adminStudentPageFragment"

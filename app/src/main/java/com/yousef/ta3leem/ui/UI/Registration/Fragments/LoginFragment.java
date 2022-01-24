@@ -11,12 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.Room.Enitities.Admin;
-import com.yousef.ta3leem.R;
+import com.yousef.ta3leem.Helper.navigation;
 import com.yousef.ta3leem.databinding.LoginFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Registration.ViewModels.LoginViewModel;
 
@@ -43,13 +41,7 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        binding.logInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AuthenticateUser(view);
-            }
-        });
+        clicks();
     }
 
 
@@ -58,41 +50,34 @@ public class LoginFragment extends Fragment {
         getFields();
         setEmptyFieldError();
 
-        if(enteredId.contains("@admin")){
-           String extractedID = extractID(enteredId);
-           boolean matchFound = false;
-           
-           //iterate through the admins in the database and find a match
-           for (int i = 0; i < allAdmins.size(); i++) {
-               String dataBaseId = allAdmins.get(i).getId();
-               String dataBasePassword = allAdmins.get(i).getPassword();
-               
-               if (extractedID.equals(dataBaseId) && enteredPassword.equals(dataBasePassword) ) {
-                   matchFound = true;
-                   break;
-               }
-           }
+        if(!enteredId.equals("") && !enteredPassword.equals("")) {
+            if (enteredId.contains("@admin")) {
+                String extractedID = extractID(enteredId);
+                boolean matchFound = false;
 
-           if (matchFound) {
-               new navigation().navigateToAdmin(view);
-           }
-           else
-               Toast.makeText(getActivity(), "Wrong ID or Password", Toast.LENGTH_SHORT).show();
-           
-       }
+                //iterate through the admins in the database and find a match
+                for (int i = 0; i < allAdmins.size(); i++) {
+                    String dataBaseId = allAdmins.get(i).getId();
+                    String dataBasePassword = allAdmins.get(i).getPassword();
 
-       else if(enteredId.contains("@teacher")) {
+                    if (extractedID.equals(dataBaseId) && enteredPassword.equals(dataBasePassword)) {
+                        matchFound = true;
+                        break;
+                    }
+                }
+
+                if (matchFound) {
+                    new navigation().navigateToAdmin(view);
+                } else
+                    Toast.makeText(getActivity(), Constants.WRONG_USERNAME_PASSWORD, Toast.LENGTH_SHORT).show();
+
+            } else if (enteredId.contains("@teacher")) {
+                String extractedID = extractID(enteredId);
+                loginViewModel.checkTeacher(extractedID, enteredPassword, view);
+            } else
+                loginViewModel.checkStudent(enteredId, enteredPassword, view);
+
         }
-
-//       //for the student
-//       else if(enteredId.length() !=0){
-//
-//        }
-//       else if (!enteredId.equals("") &&!enteredPassword.equals(""))
-//            Toast.makeText(getActivity(), "Wrong Username or Password", Toast.LENGTH_SHORT).show();
-
-       else
-           new navigation().navigateToStudent(view);
     }
 
 
@@ -161,14 +146,13 @@ public class LoginFragment extends Fragment {
         });
     }
 
-    class navigation {
-        public void navigateToAdmin(View view){
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_registrationFragment_to_adminMainPageFragment);
-        }
-        public void navigateToStudent(View view){
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_registrationFragment_to_studentMainPage);
-        }
+    public void clicks(){
+        binding.logInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AuthenticateUser(view);
+            }
+        });
     }
+
 }

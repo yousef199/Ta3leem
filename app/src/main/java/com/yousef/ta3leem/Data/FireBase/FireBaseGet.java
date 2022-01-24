@@ -1,5 +1,6 @@
 package com.yousef.ta3leem.Data.FireBase;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -114,7 +115,9 @@ public class FireBaseGet {
                 Student student = new Student();
                 if(snapshot.exists()){
                     exits = true;
+                    String id2 = snapshot.getKey();
                     student = snapshot.child(id).getValue(Student.class);
+                    Log.i("Get Student Method Outer ID: " , id2);
                 }
 
                 else

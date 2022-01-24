@@ -41,6 +41,12 @@ public class FireBaseAdd {
         dataBase.setValue(Subjects);
     }
 
+
+    public void setTeacherPassword(String id , String Password){
+        dataBase = FirebaseDatabase.getInstance().getReference(Constants.TEACHER_FIREBASE_NAME).child(id).child("password");
+        dataBase.setValue(Password);
+    }
+
     public void setStudentPassword(String id , String Password){
         dataBase = FirebaseDatabase.getInstance().getReference(Constants.STUDENT_FIREBASE_NAME).child(id).child("password");
         dataBase.setValue(Password);

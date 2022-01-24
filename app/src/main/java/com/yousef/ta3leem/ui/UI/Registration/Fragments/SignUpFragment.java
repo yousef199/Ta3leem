@@ -21,6 +21,7 @@ import com.yousef.ta3leem.databinding.SignupFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Registration.ViewModels.SignUpViewModel;
 
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 
 @Setter
@@ -49,8 +50,10 @@ public class SignUpFragment extends Fragment {
     public void setUser() {
         Initialize();
         if (id.contains("@teacher")) {
-
+            String extractedID = extractID(id);
+            viewModel.checkTeacher(extractedID, password, reEnterPassword, binding.idSignuptextinput, binding.passwordSignuptextinput, binding.reEnterpasswordSignuptextinput ,binding.signUpProgressBar);
         } else {
+            binding.signUpProgressBar.setVisibility(View.VISIBLE);
            viewModel.checkStudent(id, password, reEnterPassword, binding.idSignuptextinput, binding.passwordSignuptextinput, binding.reEnterpasswordSignuptextinput ,binding.signUpProgressBar);
         }
     }
@@ -66,11 +69,15 @@ public class SignUpFragment extends Fragment {
             binding.signUpButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    binding.signUpProgressBar.setVisibility(View.VISIBLE);
                     setUser();
                 }
             });
         }
+    public String extractID(String id){
+        int index = id.indexOf("@");
+        String extractedID = id.substring(0 , index);
+        return extractedID;
+    }
 
     }
 

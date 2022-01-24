@@ -7,14 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.AdminmainpageFragmentBinding;
 
-public class AdminMainPageFragment extends Fragment {
+public class AdminMainPageFragment extends Fragment  {
     AdminmainpageFragmentBinding binding;
 
     @Nullable
@@ -27,6 +29,7 @@ public class AdminMainPageFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        toolBarSetup();
         clicks();
     }
 
@@ -50,6 +53,17 @@ public class AdminMainPageFragment extends Fragment {
                 new navigation().adminToTeacher(view);
             }
         });
+    }
+
+
+    public void toolBarSetup(){
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
+        //Setting the toolbar
+        appCompatActivity.setSupportActionBar(binding.adminToolBar);
+//        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        appCompatActivity.getSupportActionBar().setTitle(Constants.STUDENT_PAGE_TITLE);
+        binding.circleImageView.setImageResource(R.drawable.chat_icon);
     }
 
     class navigation {

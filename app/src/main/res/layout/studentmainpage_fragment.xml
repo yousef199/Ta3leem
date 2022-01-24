@@ -10,6 +10,7 @@
             android:id="@+id/studentNavigationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layoutDirection="rtl"
             android:layout_gravity="end"
             app:menu="@menu/student_menu" />
 
@@ -51,7 +52,7 @@
         app:layout_constraintEnd_toStartOf="@+id/studentSideBar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:id="@+id/circleImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,6 +67,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="32dp"
         android:adjustViewBounds="true"
         android:src="@drawable/image_slider1"
@@ -109,7 +111,7 @@
                 android:layout_columnWeight="1">
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/examsImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
@@ -133,9 +135,9 @@
                     style="@style/semi_bold_text"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView9"
-                    app:layout_constraintStart_toStartOf="@+id/imageView9" />
+                    app:layout_constraintBottom_toBottomOf="@+id/examsImageView"
+                    app:layout_constraintEnd_toEndOf="@+id/examsImageView"
+                    app:layout_constraintStart_toStartOf="@+id/examsImageView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -147,7 +149,7 @@
                 android:layout_columnWeight="1">
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/subjectsImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:elevation="10dp"
@@ -171,9 +173,9 @@
                     android:textColor="@color/black"
                     style="@style/semi_bold_text"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView10"
-                    app:layout_constraintStart_toStartOf="@+id/imageView10" />
+                    app:layout_constraintBottom_toBottomOf="@+id/subjectsImageView"
+                    app:layout_constraintEnd_toEndOf="@+id/subjectsImageView"
+                    app:layout_constraintStart_toStartOf="@+id/subjectsImageView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -259,7 +261,7 @@
                 android:layout_columnWeight="1">
 
                 <ImageView
-                    android:id="@+id/imageView13"
+                    android:id="@+id/messagesImageView"
                     android:layout_width="wrap_content"
                     android:elevation="10dp"
                     android:layout_height="wrap_content"
@@ -282,9 +284,9 @@
                     android:elevation="10dp"
                     style="@style/semi_bold_text"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView13"
-                    app:layout_constraintStart_toStartOf="@+id/imageView13" />
+                    app:layout_constraintBottom_toBottomOf="@+id/messagesImageView"
+                    app:layout_constraintEnd_toEndOf="@+id/messagesImageView"
+                    app:layout_constraintStart_toStartOf="@+id/messagesImageView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
