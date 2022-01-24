@@ -2,6 +2,8 @@ package com.yousef.ta3leem.ui.UI.Admin.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
@@ -45,7 +47,13 @@ public class AdminStudentPageFragment extends Fragment {
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         appCompatActivity.getSupportActionBar().setTitle(Constants.STUDENT_PAGE_TITLE);
+        setHasOptionsMenu(true);
+    }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu , menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void clicks(){

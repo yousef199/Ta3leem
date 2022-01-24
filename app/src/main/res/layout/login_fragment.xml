@@ -58,26 +58,25 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
         android:background="@drawable/button_bg"
+        android:elevation="10dp"
         android:text="تسجيل الدخول"
         android:textSize="17sp"
-        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_textinput"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintVertical_bias="0.62" />
 
     <TextView
         android:id="@+id/logInforgotPasswordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
+        android:layout_marginTop="24dp"
         android:elevation="10dp"
         android:text="نسيت كلمة المرور؟"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/logInButton"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_textinput"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintTop_toBottomOf="@+id/password_textinput" />
 </androidx.constraintlayout.widget.ConstraintLayout>

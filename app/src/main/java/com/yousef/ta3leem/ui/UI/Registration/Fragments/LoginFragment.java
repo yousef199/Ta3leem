@@ -111,7 +111,7 @@ public class LoginFragment extends Fragment {
             binding.idTextinput.setErrorEnabled(false);
         }
 
-        if(enteredId.equals("")){
+        if(enteredPassword.equals("")){
             binding.passwordTextinput.setError(Constants.EMPTY_FIELD_ERROR_MESSAGE);
             binding.passwordTextinput.setErrorEnabled(true);
         }

@@ -31,16 +31,16 @@ import java.util.List;
 import java.util.Map;
 
 public class AddTeacherDialog extends AppCompatDialogFragment {
-    TextInputLayout idInput, nameInput, ageInput;
+    TextInputLayout idInput, nameInput, ageInput , classInput , subjectsInput;
     Button addClassAndSubjects;
     AutoCompleteTextView classesAutoCompleteTextView ,subjectsAutoCompleteTextView ;
     Teacher teacher;
-    String id , name , age;
+    String id , name , age , className , subjects;
     Map <String , ?> chosenClasses , chosenSubjects;
-    List<String> subjectsList = new ArrayList<>();
+    List<String> subjectsList;
     List<String> classesList = new ArrayList<>();
     List<ClassesSubjects> classesSubjectsList = new ArrayList<>();
-    ClassesSubjects classesSubjects = new ClassesSubjects();
+    ClassesSubjects classesSubjects;
     Repo repo = new Repo();
 
     @NonNull
@@ -54,14 +54,16 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         idInput = view.findViewById(R.id.addTeacherDialog_ID);
         nameInput = view.findViewById(R.id.addTeacherDialog_Name);
         ageInput = view.findViewById(R.id.addTeacherDialog_Age);
+        classInput = view.findViewById(R.id.teacherClassesTextInput);
+        subjectsInput = view.findViewById(R.id.teacherSubjectTextInput);
         addClassAndSubjects = view.findViewById(R.id.addClassAndSubjects);
         classesAutoCompleteTextView = view.findViewById(R.id.classesAutoCompleteText);
         subjectsAutoCompleteTextView = view.findViewById(R.id.subjectsAutoCompleteText);
 
 
         //Initializations
-        initializeSubjectsDropDownList();
-        initializeClassesDropDownList();
+        populateSubjectsDropDownList();
+        populateClassesDropDownList();
 
 
         //This makes the dialog have the custom view we created
@@ -100,9 +102,11 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
                 @Override
                 public void onClick(View view) {
                     Initialization();
+                    initializeSubjectsList();
                     setError();
                     if (checkFields()){
                         addAllToFireBaseThread();
+                        Toast.makeText(getActivity(),  " بنجاح"+ name + "تم اضافة المدرس ", Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 }
@@ -114,7 +118,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
     //All Methods
 
     // Assign the options from the list and assign the adapter
-    private void initializeSubjectsDropDownList(){
+    private void populateSubjectsDropDownList(){
         ArrayList<DropDownListObject> listVOs = new ArrayList<>();
         for (int i = 0; i < Constants.SUBJECTS.length; i++) {
             DropDownListObject dropDownListObject = new DropDownListObject();
@@ -128,7 +132,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
     }
 
     // Assign the options from the list and assign the adapter
-    private void initializeClassesDropDownList(){
+    private void populateClassesDropDownList(){
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.classesdropdownlistdesign, Constants.CLASSES);
         classesAutoCompleteTextView.setAdapter(arrayAdapter);
     }
@@ -235,9 +239,25 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
             ageInput.setErrorEnabled(false);
         }
 
-        if (classesSubjectsList.size() == 0){
-            Toast.makeText(getActivity(), "Please Enter Classes And Subjects", Toast.LENGTH_SHORT).show();
+        if(className.equals("الصف") || className.equals("") ||classesSubjectsList.size() == 0 ){
+            classInput.setError(Constants.CHOSEONE_ERROR_MESSAGE);
+            classInput.setErrorEnabled(true);
         }
+        else {
+            classInput.setError(null);
+            classInput.setErrorEnabled(false);
+        }
+
+        if(subjectsList.size() == 0 || classesSubjectsList.size() == 0){
+            subjectsInput.setError(Constants.CHOSEONE_ERROR_MESSAGE);
+            subjectsInput.setErrorEnabled(true);
+        }
+        else {
+            subjectsInput.setError(null);
+            subjectsInput.setErrorEnabled(false);
+        }
+
+
     }
 
     // gets the values from the fields
@@ -245,6 +265,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         id = idInput.getEditText().getText().toString().trim();
         name = nameInput.getEditText().getText().toString().trim();
         age = ageInput.getEditText().getText().toString().trim();
+        className = classesAutoCompleteTextView.getText().toString().trim();
     }
 
     // initializing  the selected classes list by getting the checked items from the sharedPreferences file and looping the map
@@ -260,7 +281,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
 
     // initializing  the selected subjects list by getting the checked items from the sharedPreferences file and looping the map
     public void initializeSubjectsList(){
-        subjectsList.clear();
+        subjectsList = new ArrayList<>();
         chosenSubjects = subjectsSharedPreferencesValue();
         if(chosenSubjects.size() !=0) {
             for (Map.Entry<String, ?> i : chosenSubjects.entrySet()) {
@@ -271,20 +292,17 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
 
     //todo: get the value of the class and clear the class selection
     public void addClassAndSubjectsButtonClick(){
+        classesSubjects = new ClassesSubjects();
         initializeSubjectsList();
-        initializeClassesList();
         if(subjectsList.size() !=0) {
             classesSubjects.setClassName(classesAutoCompleteTextView.getText().toString());
             classesSubjects.setSubjects(subjectsList);
             classesSubjectsList.add(classesSubjects);
             Toast.makeText(getActivity(), "تمت الاضافه بنجاح", Toast.LENGTH_SHORT).show();
-            System.out.println(classesAutoCompleteTextView.getText().toString());
-            System.out.println(classesSubjectsList.size());
-            System.out.println("Class Name : "+classesSubjects.getClassName() + "Subject Name: "+classesSubjects.getSubjects().get(0));
         }
         clearAll();
-        initializeClassesDropDownList();
-        initializeSubjectsDropDownList();
+        populateClassesDropDownList();
+        populateSubjectsDropDownList();
     }
 
     //todo:fix the firebase only adding the final element in the classesSubjectsList
@@ -294,7 +312,10 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
             public void run() {
                 teacher = setTeacher();
                 repo.addTeacherFireBase(teacher);
-                repo.addClassAndSubjectsFireBase(id , classesSubjectsList);
+                for (ClassesSubjects s : classesSubjectsList){
+                    repo.addClassAndSubjectsFireBase(id , s);
+                    repo.addClass(s.getClassName() , name , s.getSubjects());
+                }
             }
         };
         Thread thread = new Thread(runnable);

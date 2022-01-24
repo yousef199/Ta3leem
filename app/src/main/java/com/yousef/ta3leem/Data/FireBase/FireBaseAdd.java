@@ -8,7 +8,9 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.Constants;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FireBaseAdd {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -25,15 +27,22 @@ public class FireBaseAdd {
     }
 
 
-    public void addClassesToTeacher(String id, List<ClassesSubjects> classes) {
-        for (ClassesSubjects s : classes){
-            dataBase = FirebaseDatabase.getInstance().getReference(Constants.TEACHER_FIREBASE_NAME).child(id).child("classes").child(s.getClassName());
-            dataBase.setValue(s);
-        }
+    public void addClassesToTeacher(String id, ClassesSubjects classes) {
+            dataBase = FirebaseDatabase.getInstance().getReference(Constants.TEACHER_FIREBASE_NAME).child(id).child("classes").child(classes.getClassName());
+            dataBase.setValue(classes);
     }
 
-    public void addNewClass(ClassesSubjects classes) {
-        dataBase = firebaseDatabase.getInstance().getReference(Constants.CLASSES_FIREBASE_NAME).child(classes.getClassName());
-        dataBase.setValue(classes.getSubjects());
+    //todo: fix the duplicate subject
+    public void addNewClass(String className, String Name , List<String> Subjects) {
+        HashMap<String, String> classNameObject = new HashMap<>();
+        classNameObject.put("Class Name" , Name);
+        dataBase = firebaseDatabase.getInstance().getReference(Constants.CLASSES_FIREBASE_NAME).child(className).child(Name);
+        dataBase.setValue(classNameObject);
+        dataBase.setValue(Subjects);
+    }
+
+    public void setStudentPassword(String id , String Password){
+        dataBase = FirebaseDatabase.getInstance().getReference(Constants.STUDENT_FIREBASE_NAME).child(id).child("password");
+        dataBase.setValue(Password);
     }
 }

@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Teacher implements Cloneable{
     String name , id , age , password = "not set";
-    List<ClassesSubjects> classesSubjectsList = new ArrayList<>();
 
     public Teacher() {
     }
@@ -23,7 +22,6 @@ public class Teacher implements Cloneable{
         this.name = name;
         this.id = id;
         this.age = age;
-        this.classesSubjectsList = classesSubjectsList;
     }
 
     public String getName() {

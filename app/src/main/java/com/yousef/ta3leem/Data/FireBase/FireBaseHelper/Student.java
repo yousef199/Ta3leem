@@ -1,7 +1,9 @@
 package com.yousef.ta3leem.Data.FireBase.FireBaseHelper;
 
+import androidx.annotation.NonNull;
+
 public class Student {
-    String  name , id , age , password = "not set";
+    String  name, className , id , age , password = "not set";
 
     public Student() {
     }
@@ -38,7 +40,15 @@ public class Student {
         this.password = password;
     }
 
-    public Student( String name, String id, String age) {
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public Student(String name, String id, String age) {
         this.name = name;
         this.id = id;
         this.age = age;

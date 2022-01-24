@@ -37,9 +37,9 @@
         android:id="@+id/adminAddStudentFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink_primary"
+        android:backgroundTint="@color/blue_primary"
         android:src="@drawable/add_icon"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        app:rippleColor="@color/pink_dark" />
+        app:rippleColor="@color/blue_primary" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

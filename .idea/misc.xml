@@ -12,6 +12,8 @@
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/edittext_bg.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/logout_icon.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/menu_icon.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/progressbar_background.xml" value="0.22606837606837607" />
+        <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/search_icon.xml" value="0.2222222222222222" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/settings_icon.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/sidebar2.xml" value="0.22606837606837607" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/drawable/teacher_icon.xml" value="0.2755208333333333" />
@@ -32,7 +34,7 @@
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/signup_fragment.xml" value="0.259375" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/spinnerdesign.xml" value="0.2" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/student_navigationview.xml" value="0.2128205128205128" />
-        <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/studentadddialog.xml" value="0.12613981762917933" />
+        <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/studentadddialog.xml" value="0.2" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/studentmainpage_fragment.xml" value="0.2" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/studentpage_fragment.xml" value="0.23324275362318841" />
         <entry key="..\:/Users/Ideapad Gaming/AndroidStudioProjects/Ta3leem/app/src/main/res/layout/studentrecycler.xml" value="0.19972826086956522" />

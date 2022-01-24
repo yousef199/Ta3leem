@@ -11,5 +11,6 @@ public final class Constants {
     public static final String TEACHER_PAGE_TITLE = "المدرسون";
     public static final String STUDENT_PAGE_TITLE = "الطلاب";
     public static final String CLASSES_FIREBASE_NAME = "Classes";
+    public static final String CHOSEONE_ERROR_MESSAGE = "الرجاء اختيار احد الخيارات";
 
 }
