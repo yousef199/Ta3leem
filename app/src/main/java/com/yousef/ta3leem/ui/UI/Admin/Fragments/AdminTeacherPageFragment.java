@@ -47,6 +47,7 @@ public class AdminTeacherPageFragment extends Fragment {
         appCompatActivity.setSupportActionBar(binding.adminTeachersToolBar);
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        binding.adminTeachersToolBar.setTitleTextAppearance(getActivity() , R.style.semi_bold_text);
         appCompatActivity.getSupportActionBar().setTitle(Constants.TEACHER_PAGE_TITLE);
         setHasOptionsMenu(true);
     }

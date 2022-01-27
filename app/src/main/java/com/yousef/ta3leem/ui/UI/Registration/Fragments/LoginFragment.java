@@ -1,5 +1,7 @@
 package com.yousef.ta3leem.ui.UI.Registration.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.Room.Enitities.Admin;
-import com.yousef.ta3leem.Helper.navigation;
+import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.LoginFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Registration.ViewModels.LoginViewModel;
 
@@ -23,10 +27,11 @@ import java.util.List;
 
 public class LoginFragment extends Fragment {
     float v = 0;
-    String enteredId ,enteredPassword;
+    String enteredId ,enteredPassword , destination;
     LoginFragmentBinding binding;
     List<Admin> allAdmins = new ArrayList<>();
     LoginViewModel loginViewModel;
+    String imageURL;
 
     @Nullable
     @Override
@@ -49,9 +54,11 @@ public class LoginFragment extends Fragment {
 //       Repo repo = new Repo(getActivity().getApplication());
         getFields();
         setEmptyFieldError();
-
+        destination = "no where";
         if(!enteredId.equals("") && !enteredPassword.equals("")) {
             if (enteredId.contains("@admin")) {
+                destination = "admin";
+                String name = "";
                 String extractedID = extractID(enteredId);
                 boolean matchFound = false;
 
@@ -61,21 +68,27 @@ public class LoginFragment extends Fragment {
                     String dataBasePassword = allAdmins.get(i).getPassword();
 
                     if (extractedID.equals(dataBaseId) && enteredPassword.equals(dataBasePassword)) {
+                        name = allAdmins.get(i).getName();
+                        imageURL = allAdmins.get(i).getImage();
                         matchFound = true;
                         break;
                     }
                 }
 
                 if (matchFound) {
-                    new navigation().navigateToAdmin(view);
+                    checkImage();
+                    new navigation().navigateToAdmin(view , name , imageURL);
                 } else
                     Toast.makeText(getActivity(), Constants.WRONG_USERNAME_PASSWORD, Toast.LENGTH_SHORT).show();
 
             } else if (enteredId.contains("@teacher")) {
+                destination = "teacher";
                 String extractedID = extractID(enteredId);
                 loginViewModel.checkTeacher(extractedID, enteredPassword, view);
-            } else
+            } else {
+                destination = "student";
                 loginViewModel.checkStudent(enteredId, enteredPassword, view);
+            }
 
         }
     }
@@ -107,12 +120,14 @@ public class LoginFragment extends Fragment {
 
     }
 
+    //extract the id from the
     public String extractID(String id){
         int index = id.indexOf("@");
         String extractedID = id.substring(0 , index);
         return extractedID;
     }
 
+    //enter animation
     public void animation(){
         binding.idTextinput.setTranslationX(800);
         binding.passwordTextinput.setTranslationX(800);
@@ -130,6 +145,7 @@ public class LoginFragment extends Fragment {
         binding.logInButton.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
     }
 
+    //observing the live data
     public void getAllAdmins(){
         loginViewModel.getAllAdmins().observe(getViewLifecycleOwner(), new Observer<List<Admin>>() {
             @Override
@@ -151,8 +167,42 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 AuthenticateUser(view);
+                loginViewModel.clearSharedPrefs(destination);
             }
         });
     }
 
+    public void checkImage(){
+        if (imageURL.equals("")){
+            imageURL = Integer.toString(R.drawable.user_icon);
+        }
+    }
+
+    public static class navigation {
+        public void navigateToAdmin(View view , String name , String image) {
+            RegistrationFragmentDirections.ActionRegistrationFragmentToAdminMainPageFragment action = RegistrationFragmentDirections.actionRegistrationFragmentToAdminMainPageFragment();
+            action.setName(name);
+            action.setImage(image);
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(action);
+        }
+
+        public void navigateToStudent(View view , String name, String id , String image) {
+            NavController navController = Navigation.findNavController(view);
+            RegistrationFragmentDirections.ActionRegistrationFragmentToStudentMainPage action = RegistrationFragmentDirections.actionRegistrationFragmentToStudentMainPage();
+            action.setName(name);
+            action.setImage(image);
+            action.setId(id);
+            navController.navigate(action);
+        }
+
+        public void navigateToTeacher(View view , String name,String id , String image){
+            NavController navController = Navigation.findNavController(view);
+            RegistrationFragmentDirections.ActionRegistrationFragmentToTeacherMainPageFragment action = RegistrationFragmentDirections.actionRegistrationFragmentToTeacherMainPageFragment();
+            action.setName(name);
+            action.setImage(image);
+            action.setId(id);
+            navController.navigate(action);
+        }
+    }
 }

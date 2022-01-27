@@ -32,7 +32,6 @@ public class FireBaseAdd {
             dataBase.setValue(classes);
     }
 
-    //todo: fix the duplicate subject
     public void addNewClass(String className, String Name , List<String> Subjects) {
         HashMap<String, String> classNameObject = new HashMap<>();
         classNameObject.put("Class Name" , Name);

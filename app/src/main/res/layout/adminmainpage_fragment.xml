@@ -21,16 +21,27 @@
             android:id="@+id/adminToolBar"
             android:layoutDirection="rtl"
             android:layout_width="match_parent"
-            style="@style/semi_bold_text"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circleImageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="300dp"
-                app:civ_border_width="1dp"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="225dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/grey"
+                />
+
+            <TextView
+                android:id="@+id/adminNameTextView"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                style="@style/semi_bold_text"
+                android:textColor="@color/black"
+                android:text="الاسم"
+                />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -260,10 +271,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Widgets"
+                    android:text="المزيد"
                     android:textColor="@color/black"
                     style="@style/semi_bold_text"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

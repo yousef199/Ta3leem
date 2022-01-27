@@ -11,13 +11,17 @@ public class Admin implements Cloneable {
     @PrimaryKey
     @NonNull
     public String id;
-    public String name , password;
+    public String name , password , image;
 
-
-    public Admin(String id, String name , String password) {
+    public Admin(String id, String name , String password , String image) {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public String getId() {

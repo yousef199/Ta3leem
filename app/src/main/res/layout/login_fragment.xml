@@ -14,6 +14,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="20dp"
     android:layout_marginEnd="10dp"
+    app:hintTextAppearance="@style/hintApperance"
     android:hint="الرقم"
     app:layout_constraintEnd_toEndOf="parent"
     android:layoutDirection="rtl"
@@ -37,6 +38,7 @@
         android:layout_marginEnd="10dp"
         android:layoutDirection="rtl"
         app:passwordToggleEnabled="true"
+        app:hintTextAppearance="@style/hintApperance"
         android:hint="كلمة المرور"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -53,6 +55,7 @@
 
     <Button
         android:id="@+id/logInButton"
+        style="@style/semi_bold_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
@@ -60,13 +63,14 @@
         android:background="@drawable/button_bg"
         android:elevation="10dp"
         android:text="تسجيل الدخول"
+        android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_textinput"
-        app:layout_constraintVertical_bias="0.62" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/logInforgotPasswordTextView"

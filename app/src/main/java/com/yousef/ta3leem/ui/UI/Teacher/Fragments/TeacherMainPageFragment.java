@@ -1,4 +1,4 @@
-package com.yousef.ta3leem.ui.UI.Student.Fragments;
+package com.yousef.ta3leem.ui.UI.Teacher.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,54 +21,53 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.R;
-import com.yousef.ta3leem.databinding.StudentmainpageFragmentBinding;
+import com.yousef.ta3leem.databinding.TeachermainpageFragmentBinding;
 
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class StudentMainPage extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
-    StudentmainpageFragmentBinding binding;
-    View view2 , header;
-    String passedName , passedImage, passedID , ID , name , imageUrl;
+public class TeacherMainPageFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
+    TeachermainpageFragmentBinding binding;
+    View view2;
+    String passedName , passedImage,passedID , name , imageUrl , ID;
+    View header;
     private static final float END_SCALE = 0.7f;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = StudentmainpageFragmentBinding.inflate(inflater , container , false);
+        binding = TeachermainpageFragmentBinding.inflate(inflater , container , false);
         View view = binding.getRoot();
         view2 = view;
         return view;
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         saveImagePassedValue();
         saveNamePassedValue();
         saveIDPassedValue();
-        getAllStudentInfo();
+        getAllTeacherInfo();
+        binding.teacherNameTextView.setText(name);
         navigationDrawer();
-        binding.studentNameTextView.setText(name);
     }
-
-    //All methods
 
     //setting up the sidebar
     private void navigationDrawer() {
         //Navigation Drawer
-        binding.studentNavigationView.bringToFront();
-        binding.studentNavigationView.setNavigationItemSelectedListener(this);
+        binding.teacherNavigationView.bringToFront();
+        binding.teacherNavigationView.setNavigationItemSelectedListener(this);
 
-        //header view
-        header = binding.studentNavigationView.getHeaderView(0);
-        setStudentImage();
-        setStudentName();
-        setStudentId();
+        //header
+        header = binding.teacherNavigationView.getHeaderView(0);
+        setTeacherId();
+        setTeacherImage();
+        setTeacherName();
 
         //using the menu icon to open sidebar
-        binding.studentSideBar.setOnClickListener(new View.OnClickListener() {
+        binding.teacherSideBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (binding.studentMainPageDrawer.isDrawerVisible(GravityCompat.END)) {
@@ -114,13 +113,13 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
     }
 
     public void saveNamePassedValue(){
-        passedName = StudentMainPageArgs.fromBundle(getArguments()).getName();
+        passedName = TeacherMainPageFragmentArgs.fromBundle(getArguments()).getName();
         saveName();
     }
 
     public void saveName(){
         if(!(passedName == null)) {
-            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF, Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.TEACHER_SHARED_PREF, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("name", passedName);
             editor.apply();
@@ -129,36 +128,36 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
 
 
     public void saveImagePassedValue(){
-        passedImage = StudentMainPageArgs.fromBundle(getArguments()).getImage();
+        passedImage = TeacherMainPageFragmentArgs.fromBundle(getArguments()).getImage();
         saveImage();
     }
 
     public void saveImage(){
         if(!(passedImage == null)) {
-            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF, Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.TEACHER_SHARED_PREF, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("image", passedImage);
             editor.apply();
         }
     }
 
-
     public void saveIDPassedValue(){
-        passedID = StudentMainPageArgs.fromBundle(getArguments()).getId();
+        passedID = TeacherMainPageFragmentArgs.fromBundle(getArguments()).getId();
         saveID();
     }
 
     public void saveID(){
         if(!(passedID == null)) {
-            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF, Context.MODE_PRIVATE);
+            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.TEACHER_SHARED_PREF, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("id", passedID);
             editor.apply();
         }
     }
 
-    public void getAllStudentInfo(){
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
+
+    public void getAllTeacherInfo(){
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.TEACHER_SHARED_PREF , Context.MODE_PRIVATE);
         Map<String , ?> prefValue = sharedPreferences.getAll();
 
         for (Map.Entry<String , ?> m : prefValue.entrySet()){
@@ -171,7 +170,7 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         }
     }
 
-    public void setStudentImage(){
+    public void setTeacherImage(){
         CircleImageView studentImage = header.findViewById(R.id.navigationHeaderCircleImage);
         Glide.with(this)
                 .load(imageUrl)
@@ -179,22 +178,22 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
                 .into(studentImage);
     }
 
-    public void setStudentName(){
+    public void setTeacherName(){
         TextView studentName = header.findViewById(R.id.navigationHeaderStudentName);
         studentName.setText(name);
     }
 
-    public void setStudentId(){
+    public void setTeacherId(){
         TextView studentId = header.findViewById(R.id.navigationHeaderStudentID);
         studentId.setText(ID);
     }
+
     //inner classes
 
     public class navigation {
         public void navigateToLoginPage(View view){
             NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_studentMainPage_to_registrationFragment);
+            navController.navigate(R.id.action_teacherMainPageFragment_to_registrationFragment);
         }
     }
 }
-

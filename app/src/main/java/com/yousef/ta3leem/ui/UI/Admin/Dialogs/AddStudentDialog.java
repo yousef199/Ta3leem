@@ -18,18 +18,16 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.yousef.ta3leem.Constants;
-import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesSubjects;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
-import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.Repository.Repo;
 
 import java.util.Map;
 
 public class AddStudentDialog extends AppCompatDialogFragment {
-    private TextInputLayout idInput, nameInput , ageInput , classInput;
+    private TextInputLayout idInput, nameInput , ageInput , classInput , imageInput;
     AutoCompleteTextView classesAutoCompleteTextView;
-    String id , name , age , className;
+    String id , name , age , className , imageUrl;
     Student student;
     Repo repo = new Repo();
 
@@ -44,6 +42,7 @@ public class AddStudentDialog extends AppCompatDialogFragment {
         idInput = view.findViewById(R.id.addStudentDialog_ID);
         nameInput = view.findViewById(R.id.addStudentDialog_Name);
         ageInput = view.findViewById(R.id.addStudentDialog_Age);
+        imageInput = view.findViewById(R.id.addStudentDialog_Image);
         classesAutoCompleteTextView =view.findViewById(R.id.classesAutoCompleteText);
         classInput =view.findViewById(R.id.studentClassesTextInput);
 
@@ -78,7 +77,6 @@ public class AddStudentDialog extends AppCompatDialogFragment {
         if (alertDialog != null){
             Button positiveButton = (Button) alertDialog.getButton(Dialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener() {
-                //Todo: Call the add to add to the firebase
                 @Override
                 public void onClick(View view) {
                     Initialization();
@@ -123,6 +121,12 @@ public class AddStudentDialog extends AppCompatDialogFragment {
         student.setId(id);
         student.setAge(age);
         student.setClassName(className);
+        if(imageUrl.equals("")){
+            imageUrl = "null";
+            student.setImage(imageUrl);
+        }
+        else
+            student.setImage(imageUrl);
         return student;
     }
 
@@ -137,7 +141,6 @@ public class AddStudentDialog extends AppCompatDialogFragment {
         return state;
     }
 
-    //Todo: Display an error message on the spinners
     //sets errors on the null fields and removes them if the fields have values
     public void setError() {
         if (id.equals("")) {
@@ -165,7 +168,7 @@ public class AddStudentDialog extends AppCompatDialogFragment {
         }
 
         if (className.equals("الصف") || className.equals("")) {
-            classInput.setError(Constants.CHOSEONE_ERROR_MESSAGE);
+            classInput.setError(Constants.CHOOSE_ONE_ERROR_MESSAGE);
             classInput.setErrorEnabled(true);
         } else {
             classInput.setError(null);
@@ -179,6 +182,7 @@ public class AddStudentDialog extends AppCompatDialogFragment {
         name = nameInput.getEditText().getText().toString().trim();
         age = ageInput.getEditText().getText().toString().trim();
         className = classesAutoCompleteTextView.getText().toString().trim();
+        imageUrl = imageInput.getEditText().getText().toString().trim();
     }
 
 

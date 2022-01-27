@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/cairo_regular</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="AlertDialogStyle" parent="Theme.AppCompat.Dialog">
@@ -27,4 +28,22 @@
         <item name="fontFamily">@font/cairo_bold</item>
     </style>
 
+    <style name="toolBarTitle">
+        <item name="fontFamily">@font/cairo_semibold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="tabTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="hintApperance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="NavigationDrawerStyle">
+        <item name="android:textSize">17sp</item><!-- text size in menu-->
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

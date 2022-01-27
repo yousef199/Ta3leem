@@ -4,24 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.textfield.TextInputLayout;
-import com.yousef.ta3leem.Data.FireBase.CallBacks.studentFireBaseCallBack;
-import com.yousef.ta3leem.Data.FireBase.FireBaseAdd;
-import com.yousef.ta3leem.Data.FireBase.FireBaseGet;
-import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
-import com.yousef.ta3leem.Data.FireBase.SignUpFireBaseAuth;
+import com.google.android.gms.common.SignInButton;
 import com.yousef.ta3leem.databinding.SignupFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Registration.ViewModels.SignUpViewModel;
 
 import lombok.Setter;
-import lombok.SneakyThrows;
 
 
 @Setter
@@ -51,7 +44,7 @@ public class SignUpFragment extends Fragment {
         Initialize();
         if (id.contains("@teacher")) {
             String extractedID = extractID(id);
-            viewModel.checkTeacher(extractedID, password, reEnterPassword, binding.idSignuptextinput, binding.passwordSignuptextinput, binding.reEnterpasswordSignuptextinput ,binding.signUpProgressBar);
+            viewModel.setTeacher(extractedID, password, reEnterPassword, binding.idSignuptextinput, binding.passwordSignuptextinput, binding.reEnterpasswordSignuptextinput ,binding.signUpProgressBar);
         } else {
             binding.signUpProgressBar.setVisibility(View.VISIBLE);
            viewModel.checkStudent(id, password, reEnterPassword, binding.idSignuptextinput, binding.passwordSignuptextinput, binding.reEnterpasswordSignuptextinput ,binding.signUpProgressBar);

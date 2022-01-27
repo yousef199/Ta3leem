@@ -17,17 +17,17 @@ import com.yousef.ta3leem.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubjectsSpinnerAdapter extends ArrayAdapter<DropDownListObject> {
+public class SubjectsDropDownListAdapter extends ArrayAdapter<DropDownListObject> {
     private Context mContext;
     private ArrayList<DropDownListObject> listState;
-    private SubjectsSpinnerAdapter subjectsSpinnerAdapter;
+    private SubjectsDropDownListAdapter subjectsDropDownListAdapter;
     private boolean isFromView = false;
 
-    public SubjectsSpinnerAdapter(Context context, int resource, List<DropDownListObject> objects) {
+    public SubjectsDropDownListAdapter(Context context, int resource, List<DropDownListObject> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.listState = (ArrayList<DropDownListObject>) objects;
-        this.subjectsSpinnerAdapter = this;
+        this.subjectsDropDownListAdapter = this;
     }
 
     @Override

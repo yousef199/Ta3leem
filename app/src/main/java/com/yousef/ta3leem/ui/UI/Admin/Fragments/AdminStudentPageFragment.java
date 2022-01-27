@@ -46,6 +46,7 @@ public class AdminStudentPageFragment extends Fragment {
         appCompatActivity.setSupportActionBar(binding.adminStudentsToolBar);
         appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        binding.adminStudentsToolBar.setTitleTextAppearance(getActivity() , R.style.semi_bold_text);
         appCompatActivity.getSupportActionBar().setTitle(Constants.STUDENT_PAGE_TITLE);
         setHasOptionsMenu(true);
     }

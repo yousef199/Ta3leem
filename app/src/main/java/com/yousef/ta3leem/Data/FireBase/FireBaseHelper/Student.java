@@ -3,9 +3,17 @@ package com.yousef.ta3leem.Data.FireBase.FireBaseHelper;
 import androidx.annotation.NonNull;
 
 public class Student {
-    String  name, className , id , age , password = "not set";
+    String  name, className, imageURL , id , age , password = "not set";
 
     public Student() {
+    }
+
+    public String getImage() {
+        return imageURL;
+    }
+
+    public void setImage(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getName() {

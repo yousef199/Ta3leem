@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_registrationFragment_to_studentMainPage"
             app:destination="@id/studentMainPage" />
+        <action
+            android:id="@+id/action_registrationFragment_to_teacherMainPageFragment"
+            app:destination="@id/teacherMainPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminMainPageFragment"
@@ -42,7 +45,16 @@
             app:destination="@id/registrationFragment" />
         <argument
             android:name="name"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
     </fragment>
     <fragment
         android:id="@+id/adminStudentPageFragment"
@@ -67,5 +79,49 @@
         <action
             android:id="@+id/action_studentMainPage_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherMainPageFragment"
+        android:name="com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherMainPageFragment"
+        android:label="TeacherMainPageFragment" >
+        <action
+            android:id="@+id/action_teacherMainPageFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
     </fragment>
 </navigation>

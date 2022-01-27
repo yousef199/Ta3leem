@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.yousef.ta3leem.Adapters.SubjectsSpinnerAdapter;
+import com.yousef.ta3leem.Adapters.SubjectsDropDownListAdapter;
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesSubjects;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
@@ -31,11 +31,11 @@ import java.util.List;
 import java.util.Map;
 
 public class AddTeacherDialog extends AppCompatDialogFragment {
-    TextInputLayout idInput, nameInput, ageInput , classInput , subjectsInput;
+    TextInputLayout idInput, nameInput, ageInput , classInput , subjectsInput , imageTextInput;
     Button addClassAndSubjects;
     AutoCompleteTextView classesAutoCompleteTextView ,subjectsAutoCompleteTextView ;
     Teacher teacher;
-    String id , name , age , className , subjects;
+    String id , name , age , className ,imageURL, subjects;
     Map <String , ?> chosenClasses , chosenSubjects;
     List<String> subjectsList;
     List<String> classesList = new ArrayList<>();
@@ -59,6 +59,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         addClassAndSubjects = view.findViewById(R.id.addClassAndSubjects);
         classesAutoCompleteTextView = view.findViewById(R.id.classesAutoCompleteText);
         subjectsAutoCompleteTextView = view.findViewById(R.id.subjectsAutoCompleteText);
+        imageTextInput = view.findViewById(R.id.addTeacherDialog_ImgUrl);
 
 
         //Initializations
@@ -98,7 +99,6 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
             Button positiveButton = (Button) alertDialog.getButton(Dialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener() {
 
-                //Todo: Call the add to add to the firebase
                 @Override
                 public void onClick(View view) {
                     Initialization();
@@ -126,9 +126,9 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
             dropDownListObject.setSelected(false);
             listVOs.add(dropDownListObject);
         }
-        SubjectsSpinnerAdapter subjectsSpinnerAdapter = new SubjectsSpinnerAdapter(getActivity(), 0,
+        SubjectsDropDownListAdapter subjectsDropDownListAdapter = new SubjectsDropDownListAdapter(getActivity(), 0,
                 listVOs);
-        subjectsAutoCompleteTextView.setAdapter(subjectsSpinnerAdapter);
+        subjectsAutoCompleteTextView.setAdapter(subjectsDropDownListAdapter);
     }
 
     // Assign the options from the list and assign the adapter
@@ -169,9 +169,9 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
 
     //clear the spinner to clear the check boxes
     public void clearSubjectsDropDownList(){
-        SubjectsSpinnerAdapter subjectsSpinnerAdapter = (SubjectsSpinnerAdapter) subjectsAutoCompleteTextView.getAdapter();
-        subjectsSpinnerAdapter.clear();
-        subjectsSpinnerAdapter.notifyDataSetChanged();
+        SubjectsDropDownListAdapter subjectsDropDownListAdapter = (SubjectsDropDownListAdapter) subjectsAutoCompleteTextView.getAdapter();
+        subjectsDropDownListAdapter.clear();
+        subjectsDropDownListAdapter.notifyDataSetChanged();
     }
 
     //clear the spinner to clear the check boxes
@@ -195,6 +195,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         teacher.setName(name);
         teacher.setId(id);
         teacher.setAge(age);
+        teacher.setImage(imageURL);
         return teacher;
     }
 
@@ -209,7 +210,6 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         return state;
     }
 
-    //Todo: Display an error message on the spinners
     //sets errors on the null fields and removes them if the fields have values
     public void setError(){
         if(id.equals("")){
@@ -240,7 +240,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         }
 
         if(className.equals("الصف") || className.equals("") ||classesSubjectsList.size() == 0 ){
-            classInput.setError(Constants.CHOSEONE_ERROR_MESSAGE);
+            classInput.setError(Constants.CHOOSE_ONE_ERROR_MESSAGE);
             classInput.setErrorEnabled(true);
         }
         else {
@@ -249,7 +249,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         }
 
         if(subjectsList.size() == 0 || classesSubjectsList.size() == 0){
-            subjectsInput.setError(Constants.CHOSEONE_ERROR_MESSAGE);
+            subjectsInput.setError(Constants.CHOOSE_ONE_ERROR_MESSAGE);
             subjectsInput.setErrorEnabled(true);
         }
         else {
@@ -266,6 +266,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         name = nameInput.getEditText().getText().toString().trim();
         age = ageInput.getEditText().getText().toString().trim();
         className = classesAutoCompleteTextView.getText().toString().trim();
+        imageURL = imageTextInput.getEditText().getText().toString();
     }
 
     // initializing  the selected classes list by getting the checked items from the sharedPreferences file and looping the map
@@ -290,7 +291,6 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         }
     }
 
-    //todo: get the value of the class and clear the class selection
     public void addClassAndSubjectsButtonClick(){
         classesSubjects = new ClassesSubjects();
         initializeSubjectsList();
@@ -305,7 +305,6 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
         populateSubjectsDropDownList();
     }
 
-    //todo:fix the firebase only adding the final element in the classesSubjectsList
     public void addAllToFireBaseThread(){
         Runnable runnable = new Runnable() {
             @Override

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher implements Cloneable{
-    String name , id , age , password = "not set";
+    String name , id , age, image , password = "not set";
 
     public Teacher() {
     }
@@ -22,6 +22,14 @@ public class Teacher implements Cloneable{
         this.name = name;
         this.id = id;
         this.age = age;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

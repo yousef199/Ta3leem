@@ -17,17 +17,21 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseAdd;
 import com.yousef.ta3leem.Data.FireBase.FireBaseGet;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
+import com.yousef.ta3leem.ui.UI.Registration.Fragments.SignUpFragment;
 
 import java.util.concurrent.TimeUnit;
 
 public class SignUpViewModel extends AndroidViewModel {
 
-    public SignUpViewModel(@NonNull Application application) {
+    SignUpFragment signUpFragment;
+
+    public SignUpViewModel(@NonNull Application application ) {
         super(application);
+        this.signUpFragment = signUpFragment;
     }
 
 
-    public void checkTeacher(String id, String password, String reEnterPassword, TextInputLayout idInput, TextInputLayout passwordInput, TextInputLayout reEnterPasswordInput , ProgressBar progressBar){
+    public void setTeacher(String id, String password, String reEnterPassword, TextInputLayout idInput, TextInputLayout passwordInput, TextInputLayout reEnterPasswordInput , ProgressBar progressBar){
         progressBar.setVisibility(View.VISIBLE);
         FireBaseGet get = new FireBaseGet();
         FireBaseAdd add = new FireBaseAdd();

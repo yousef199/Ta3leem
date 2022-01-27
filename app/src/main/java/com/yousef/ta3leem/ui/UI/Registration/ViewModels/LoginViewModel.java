@@ -1,6 +1,8 @@
 package com.yousef.ta3leem.ui.UI.Registration.ViewModels;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +17,7 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseGet;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.Data.Room.Enitities.Admin;
-import com.yousef.ta3leem.Helper.navigation;
+import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.Repository.Repo;
 import com.yousef.ta3leem.ui.UI.Registration.Fragments.LoginFragment;
 
@@ -38,8 +40,9 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void checkTeacher (String id , String password , View view){
         FireBaseGet get = new FireBaseGet();
-        navigation nav = new navigation();
+        LoginFragment.navigation nav = new LoginFragment.navigation();
         get.getTeacher(id, new teacherFireBaseCallBack() {
+            String image;
             @Override
             public void teacherOnCallBack(Teacher teacher) {
                 if(get.isExits()){
@@ -47,7 +50,12 @@ public class LoginViewModel extends AndroidViewModel {
                         Toast.makeText(getApplication(), Constants.AUTHENTICATE_USER, Toast.LENGTH_SHORT).show();
                     }
                     else if (password.equals(teacher.getPassword())){
-                        nav.navigateToStudent(view);
+                        if (teacher.getImage() ==null){
+                            image = Integer.toString(R.drawable.user_icon);
+                        }
+                        else
+                            image = teacher.getImage();
+                        nav.navigateToTeacher(view , teacher.getName(), teacher.getId() , image);
                     }
 
                     else
@@ -57,13 +65,13 @@ public class LoginViewModel extends AndroidViewModel {
                 }
             }
         });
-
     }
     public void checkStudent (String id , String password , View view){
         FireBaseGet get = new FireBaseGet();
-        navigation nav = new navigation();
+        LoginFragment.navigation nav = new LoginFragment.navigation();
 
         get.getStudent(id, new studentFireBaseCallBack() {
+            String image;
             @Override
             public void onCallback(Student student) {
                 if(get.isExits()){
@@ -71,7 +79,13 @@ public class LoginViewModel extends AndroidViewModel {
                         Toast.makeText(getApplication(), Constants.AUTHENTICATE_USER, Toast.LENGTH_SHORT).show();
                     }
                     else if (password.equals(student.getPassword())){
-                        nav.navigateToStudent(view);
+                        // Check if there is an image if not pass the default user image
+                        if (student.getImage() == null){
+                            image = Integer.toString(R.drawable.user_icon);
+                        }
+                        else
+                            image = student.getImage();
+                        nav.navigateToStudent(view , student.getName(), student.getId() , image);
                     }
                     else
                         Toast.makeText(getApplication(), Constants.WRONG_USERNAME_PASSWORD, Toast.LENGTH_SHORT).show();
@@ -82,4 +96,32 @@ public class LoginViewModel extends AndroidViewModel {
         });
     }
 
+    public void clearSharedPrefs(String destination){
+        SharedPreferences sharedPreferences;
+        SharedPreferences.Editor editor;
+        switch (destination){
+            case "admin":
+                sharedPreferences = getApplication().getSharedPreferences(Constants.ADMIN_NAME_PREF , Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                break;
+            case "teacher":
+                sharedPreferences = getApplication().getSharedPreferences(Constants.TEACHER_SHARED_PREF , Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                break;
+            case "student":
+                sharedPreferences = getApplication().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                break;
+        }
+        sharedPreferences = getApplication().getSharedPreferences(Constants.IMAGE_SHARED_PREF , Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }
