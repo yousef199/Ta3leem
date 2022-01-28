@@ -52,6 +52,7 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
         getAllTeacherInfo();
         binding.teacherNameTextView.setText(name);
         navigationDrawer();
+        clicks();
     }
 
     //setting up the sidebar
@@ -188,6 +189,15 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
         studentId.setText(ID);
     }
 
+    public void clicks(){
+        binding.messagesImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new navigation().navigateToMessagingPage(view);
+            }
+        });
+    }
+
     //inner classes
 
     public class navigation {
@@ -195,5 +205,11 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_teacherMainPageFragment_to_registrationFragment);
         }
+        public void navigateToMessagingPage(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_teacherMainPageFragment_to_nav_graph2);
+        }
+
     }
+
 }
