@@ -51,6 +51,7 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         getAllStudentInfo();
         navigationDrawer();
         binding.studentNameTextView.setText(name);
+        clicks();
     }
 
     //All methods
@@ -188,12 +189,26 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         TextView studentId = header.findViewById(R.id.navigationHeaderStudentID);
         studentId.setText(ID);
     }
+
+    public void clicks(){
+        binding.messagesImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new navigation().navigateToMessagingPage(view);
+            }
+        });
+    }
+
     //inner classes
 
     public class navigation {
         public void navigateToLoginPage(View view){
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_studentMainPage_to_registrationFragment);
+        }
+        public void navigateToMessagingPage(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_studentMainPage_to_nav_graph2);
         }
     }
 }

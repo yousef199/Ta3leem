@@ -11,4 +11,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#CDC7C7</color>
+    <color name="toolbarBarColor">@color/white</color>
+    <color name="titleColor">@color/black</color>
 </resources>

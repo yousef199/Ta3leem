@@ -97,6 +97,9 @@
             app:nullable="true"
             android:defaultValue="@null"
             />
+        <action
+            android:id="@+id/action_studentMainPage_to_nav_graph2"
+            app:destination="@id/nav_graph_chat" />
     </fragment>
     <fragment
         android:id="@+id/teacherMainPageFragment"
@@ -123,5 +126,9 @@
             app:nullable="true"
             android:defaultValue="@null"
             />
+        <action
+            android:id="@+id/action_teacherMainPageFragment_to_nav_graph2"
+            app:destination="@id/nav_graph_chat" />
     </fragment>
+    <include app:graph="@navigation/chat_nav_graph" />
 </navigation>

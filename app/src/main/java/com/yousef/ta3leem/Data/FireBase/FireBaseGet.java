@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +34,8 @@ public class FireBaseGet {
 
     public void getTeachers(allTeachersFirebaseCallBack callBack){
         dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
-        List<Teacher> allTeachers = new ArrayList<>();
-        dataBase.addListenerForSingleValueEvent(new ValueEventListener() {
+        dataBase.addValueEventListener(new ValueEventListener() {
+            List<Teacher> allTeachers = new ArrayList<>();
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
@@ -59,7 +61,7 @@ public class FireBaseGet {
         dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
         Query getTeacher = dataBase.orderByChild("id").equalTo(id);
 
-        getTeacher.addListenerForSingleValueEvent(new ValueEventListener() {
+        getTeacher.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Teacher teacher = new Teacher();
@@ -80,31 +82,6 @@ public class FireBaseGet {
         });
     }
 
-    public void getStudents(allStudentsFireBaseCallBack callBack){
-        dataBase = firebaseDatabase.getReference().child(Constants.STUDENT_FIREBASE_NAME);
-        List<Student> allStudents = new ArrayList<>();
-        dataBase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    exits = true;
-                    Iterable<DataSnapshot> children = snapshot.getChildren();
-                    for (DataSnapshot s : children) {
-                        allStudents.add(s.getValue(Student.class));
-                    }
-                }
-                else
-                    exits = false;
-
-                callBack.onCallBack(allStudents);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     public void getStudent(String id , studentFireBaseCallBack callBack){
         dataBase = FirebaseDatabase.getInstance().getReference(Constants.STUDENT_FIREBASE_NAME);
@@ -133,6 +110,22 @@ public class FireBaseGet {
 
     }
 
+    public void getTeachers2(allTeachersFirebaseCallBack callBack){
+        dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
+        dataBase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            List<Teacher> allTeachers = new ArrayList<>();
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                        Iterable<DataSnapshot> children = task.getResult().getChildren();
+                        for (DataSnapshot dataSnapshot : children) {
+                            allTeachers.add(dataSnapshot.getValue(Teacher.class));
+                        }
+                    }
+                callBack.allTeachersOnCallBack(allTeachers);
+                }
+        });
+    }
     public boolean isExits() {
         return exits;
     }

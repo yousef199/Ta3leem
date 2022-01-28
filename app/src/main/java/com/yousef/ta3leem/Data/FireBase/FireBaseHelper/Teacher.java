@@ -3,10 +3,12 @@ package com.yousef.ta3leem.Data.FireBase.FireBaseHelper;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Teacher implements Cloneable{
     String name , id , age, image , password = "not set";
+    HashMap<String, ClassesSubjects> classes;
 
     public Teacher() {
     }
@@ -16,12 +18,28 @@ public class Teacher implements Cloneable{
         this.age = teacher.age;
         this.id = teacher.id;
         this.password = teacher.password;
+        this.classes = teacher.classes;
     }
 
-    public Teacher(String name, String id, String age , List<ClassesSubjects> classesSubjectsList) {
+
+    public HashMap<String, ClassesSubjects> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(HashMap<String, ClassesSubjects> classes) {
+        this.classes = classes;
+    }
+
+    public Teacher(String name, String id, String age , String image,List<ClassesSubjects> classesSubjectsList) {
         this.name = name;
         this.id = id;
         this.age = age;
+        this.image = image;
+    }
+
+    public Teacher(String name, String image) {
+        this.name = name;
+        this.image = image;
     }
 
     public String getImage() {

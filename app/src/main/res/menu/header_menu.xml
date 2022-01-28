@@ -5,6 +5,7 @@
         android:checkableBehavior="single">
         <item android:id="@+id/nav_logout"
             android:title="تسجيل خروج"
+            android:icon="@drawable/logout_icon"
             />
     </group>
 </menu>
