@@ -1,5 +1,8 @@
 package com.yousef.ta3leem.Data.FireBase.FireBaseHelper;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -20,7 +23,6 @@ public class Teacher implements Cloneable{
         this.password = teacher.password;
         this.classes = teacher.classes;
     }
-
 
     public HashMap<String, ClassesSubjects> getClasses() {
         return classes;

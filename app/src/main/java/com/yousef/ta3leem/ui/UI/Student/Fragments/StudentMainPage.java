@@ -14,23 +14,32 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.yousef.ta3leem.Constants;
+import com.yousef.ta3leem.Data.FireBase.CallBacks.teacherSubjectCallBack;
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.TeacherSubject;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.StudentmainpageFragmentBinding;
+import com.yousef.ta3leem.ui.UI.Student.ViewModels.StudentViewModel;
 
+import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * This class handles the student main page.
+ */
 public class StudentMainPage extends Fragment implements NavigationView.OnNavigationItemSelectedListener {
     StudentmainpageFragmentBinding binding;
     View view2 , header;
-    String passedName , passedImage, passedID , ID , name , imageUrl;
+    String passedName , passedImage, passedID ,passedClassName, ID , name , imageUrl , className;
+    StudentViewModel studentViewModel;
     private static final float END_SCALE = 0.7f;
 
     @Nullable
@@ -38,6 +47,7 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = StudentmainpageFragmentBinding.inflate(inflater , container , false);
         View view = binding.getRoot();
+        studentViewModel = new ViewModelProvider(this).get(StudentViewModel.class);
         view2 = view;
         return view;
     }
@@ -45,9 +55,7 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        saveImagePassedValue();
-        saveNamePassedValue();
-        saveIDPassedValue();
+        saveAllValues();
         getAllStudentInfo();
         navigationDrawer();
         binding.studentNameTextView.setText(name);
@@ -114,6 +122,13 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         return true;
     }
 
+    public void saveAllValues(){
+        saveNamePassedValue();
+        saveIDPassedValue();
+        saveImagePassedValue();
+        saveClassNamePassedValue();
+    }
+
     public void saveNamePassedValue(){
         passedName = StudentMainPageArgs.fromBundle(getArguments()).getName();
         saveName();
@@ -128,6 +143,19 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         }
     }
 
+    public void saveClassNamePassedValue(){
+        passedClassName = StudentMainPageArgs.fromBundle(getArguments()).getClassName();
+        saveClassName();
+    }
+
+    public void saveClassName(){
+        if(!(passedClassName == null)) {
+            SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("className", passedClassName);
+            editor.apply();
+        }
+    }
 
     public void saveImagePassedValue(){
         passedImage = StudentMainPageArgs.fromBundle(getArguments()).getImage();
@@ -169,6 +197,8 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
                 imageUrl = (String) m.getValue();
             if(m.getKey() == "name")
                 name = (String) m.getValue();
+            if(m.getKey() == "className")
+                className = (String) m.getValue();
         }
     }
 
@@ -197,6 +227,24 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
                 new navigation().navigateToMessagingPage(view);
             }
         });
+
+        binding.subjectsImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //cache the student subjects info
+                studentViewModel.getSudentClassTeachers(className, new teacherSubjectCallBack() {
+                    @Override
+                    public void onCallBack(TeacherSubject teacherSubject) {
+                        int counter = 0;
+                        Map<String , List<String>> m= teacherSubject.getTeacherSubjects();
+                        System.out.println("Size :" + m.size());
+                        for(Map.Entry<String , List<String>> m2 : m.entrySet()){
+                            System.out.println("Key: " + m2.getKey() + "Value: " + m2.getValue().get(0) + "Value 2: " + m2.getValue().get(1));
+                        }
+                    }
+                });
+            }
+        });
     }
 
     //inner classes
@@ -208,7 +256,12 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         }
         public void navigateToMessagingPage(View view){
             NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_studentMainPage_to_nav_graph2);
+            navController.navigate(R.id.action_studentMainPage_to_channelFragment);
+        }
+
+        public void navigateToSubjectsPage(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_studentMainPage_to_studentSubjectsPage);
         }
     }
 }

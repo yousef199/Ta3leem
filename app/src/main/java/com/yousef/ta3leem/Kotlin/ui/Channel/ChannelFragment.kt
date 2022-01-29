@@ -2,6 +2,8 @@ package com.yousef.ta3leem.Kotlin.ui.Channel
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.yousef.ta3leem.Constants
 import com.yousef.ta3leem.R
 import com.yousef.ta3leem.databinding.FragmentChannelBinding
 import io.getstream.chat.android.client.ChatClient
@@ -30,13 +33,18 @@ import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListVi
 
 class ChannelFragment : Fragment() {
 
-    private val args: ChannelFragmentArgs by navArgs()
 
     private var _binding: FragmentChannelBinding? = null
     private val binding get() = _binding!!
 
     private val client = ChatClient.instance()
     private lateinit var user: User
+
+//    private val sharedPreferences:SharedPreferences = requireActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
+//    val id : String? = sharedPreferences.getString("id" , null)
+//    val name : String? = sharedPreferences.getString("name" , null);
+//    val image : String? = sharedPreferences.getString("image" , null);
+
 
     @SuppressLint("WrongConstant")
     override fun onCreateView(
@@ -71,37 +79,32 @@ class ChannelFragment : Fragment() {
     }
 
     private fun setupUser() {
-        if (client.getCurrentUser() == null) {
-            user = if (args.chatUser.firstName.contains("yousef")) {
-                User(
-                    id = args.chatUser.username,
-                    extraData = mutableMapOf(
-                        "name" to args.chatUser.firstName,
-                        "country" to "Jordan",
-                        "image" to "https://yt3.ggpht.com/ytc/AAUvwniNg3lwIeJ-ybvA1xuWBEzLoYA5KPxnKrojub0zhg=s900-c-k-c0x00ffffff-no-rj"
+//        if(id != null && image != null && name != null) {
+            if (client.getCurrentUser() == null) {
+                user = User(
+                        id = "12345",
+                        extraData = mutableMapOf(
+                            "name" to "yousef",
+                            "country" to "Jordan",
+//                            "image" to image
+                        )
                     )
-                )
-            } else {
-                User(
-                    id = args.chatUser.username,
-                    extraData = mutableMapOf(
-                        "name" to args.chatUser.firstName
-                    )
-                )
-            }
-            val token = client.devToken(user.id)
-            client.connectUser(
-                user = user,
-                token = token
-            ).enqueue { result ->
-                if (result.isSuccess) {
-                    Log.d("ChannelFragment", "Success Connecting the User")
-                } else {
-                    Log.d("ChannelFragment", result.error().message.toString())
+                }
+
+                val token = client.devToken(user.id)
+                client.connectUser(
+                    user = user,
+                    token = token
+                ).enqueue { result ->
+                    if (result.isSuccess) {
+                        Log.d("ChannelFragment", "Success Connecting the User")
+                    } else {
+                        Log.d("ChannelFragment", result.error().message.toString())
+                    }
                 }
             }
-        }
-    }
+
+
 
     private fun setupChannels() {
         val filters = Filters.and(
@@ -150,7 +153,7 @@ class ChannelFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             client.disconnect()
-            findNavController().navigate(R.id.action_channelFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_channelFragment_to_studentMainPage)
             showToast("Logged out successfully")
         }
         builder.setNegativeButton("No") { _, _ -> }

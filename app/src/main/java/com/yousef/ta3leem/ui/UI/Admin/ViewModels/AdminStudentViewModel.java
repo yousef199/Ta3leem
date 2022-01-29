@@ -1,4 +1,27 @@
 package com.yousef.ta3leem.ui.UI.Admin.ViewModels;
 
-public class AdminStudentViewModel {
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
+
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
+import com.yousef.ta3leem.Repository.Repo;
+
+import java.util.List;
+
+public class AdminStudentViewModel extends AndroidViewModel {
+
+    Repo repo;
+
+    public AdminStudentViewModel(@NonNull Application application) {
+        super(application);
+        repo = new Repo(application);
+    }
+
+    public MutableLiveData<List<Student>> getStudentList(){
+       return repo.getStudentsFireBase();
+    }
 }

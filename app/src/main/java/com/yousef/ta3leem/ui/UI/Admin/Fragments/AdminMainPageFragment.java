@@ -17,14 +17,20 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.yousef.ta3leem.Constants;
+import com.yousef.ta3leem.Data.FireBase.CallBacks.allTeachersFirebaseCallBack;
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.R;
+import com.yousef.ta3leem.Repository.Repo;
 import com.yousef.ta3leem.databinding.AdminmainpageFragmentBinding;
+import com.yousef.ta3leem.ui.UI.Registration.Fragments.RegistrationFragmentDirections;
 
+import java.util.List;
 import java.util.Map;
 
 public class AdminMainPageFragment extends Fragment  {
     AdminmainpageFragmentBinding binding;
     String passedName , name , imageUrl , passedImage;
+    Repo repo = new Repo();
 
     @Nullable
     @Override
@@ -73,30 +79,9 @@ public class AdminMainPageFragment extends Fragment  {
         appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
         binding.adminNameTextView.setText(name);
         setImage();
-//        setImage();
     }
 
-    class navigation {
-        private void adminToStudent(View view){
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_adminMainPageFragment_to_adminStudentPageFragment);
-        }
-        private void adminToTeacher(View view){
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_adminMainPageFragment_to_adminTeacherPage);
-        }
-        private void adminToRegistration(View view){
-            NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_adminMainPageFragment_to_registrationFragment);
-        }
-    }
 
-//    public void setImage(){
-//        passedImage = AdminMainPageFragmentArgs.fromBundle(getArguments()).getImage();
-//        Glide.with(this)
-//                .load(passedImage)
-//                .into(binding.circleImageView);
-//    }
 
     public void saveNamePassedValue(){
             passedName = AdminMainPageFragmentArgs.fromBundle(getArguments()).getName();
@@ -151,5 +136,22 @@ public class AdminMainPageFragment extends Fragment  {
     public void onDestroyView() {
         super.onDestroyView();
 //        clearSharedPreferences();
+    }
+
+    //Inner classes
+
+    class navigation {
+        private void adminToStudent(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_adminMainPageFragment_to_adminStudentPageFragment);
+        }
+        private void adminToTeacher(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_adminMainPageFragment_to_adminTeacherPage);
+        }
+        private void adminToRegistration(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_adminMainPageFragment_to_registrationFragment);
+        }
     }
 }

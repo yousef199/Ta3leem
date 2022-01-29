@@ -1,6 +1,7 @@
 package com.yousef.ta3leem.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +15,17 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStudentRecyclerAdapter.viewHolder>  {
-    List<Student> studentList;
+    List<Student> studentList = new ArrayList<>();
     Context context;
 
-    public AdminStudentRecyclerAdapter(Context context, List<Student> studentList){
+    public AdminStudentRecyclerAdapter(Context context){
         this.context = context;
-        this.studentList = studentList;
     }
 
     @NonNull
@@ -50,6 +51,14 @@ public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStude
     @Override
     public int getItemCount() {
         return studentList.size();
+    }
+
+    public void setStudentList(List<Student> studentList){
+        this.studentList.clear();
+        for (Student student : studentList){
+                this.studentList.add(student);
+        }
+        notifyDataSetChanged();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{

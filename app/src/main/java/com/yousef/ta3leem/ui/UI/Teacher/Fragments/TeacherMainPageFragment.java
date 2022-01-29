@@ -207,7 +207,7 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
         }
         public void navigateToMessagingPage(View view){
             NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_teacherMainPageFragment_to_nav_graph2);
+            navController.navigate(R.id.action_teacherMainPageFragment_to_channelFragment);
         }
 
     }

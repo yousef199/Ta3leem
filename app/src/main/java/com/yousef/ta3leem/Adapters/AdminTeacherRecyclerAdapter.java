@@ -64,6 +64,7 @@ public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeach
     }
 
     public void setTeacherList(List<Teacher> teacherList){
+        this.teacherList.clear();
         for (Teacher teacher : teacherList){
             if (!checkTeacherList.contains(teacher)){
                 this.teacherList.add(teacher);

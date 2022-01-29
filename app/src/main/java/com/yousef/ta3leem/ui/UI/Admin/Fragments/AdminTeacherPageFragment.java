@@ -30,6 +30,7 @@ import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.FireBase.CallBacks.allTeachersFirebaseCallBack;
 import com.yousef.ta3leem.Data.FireBase.FireBaseGet;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
+import com.yousef.ta3leem.Data.Room.Enitities.Admin;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.Repository.Repo;
 import com.yousef.ta3leem.databinding.AdminteacherpageFragmentBinding;
@@ -45,11 +46,10 @@ import java.util.Set;
 
 public class AdminTeacherPageFragment extends Fragment {
     AdminteacherpageFragmentBinding binding;
-    Repo repo = new Repo();
     AdminTeacherRecyclerAdapter adapter;
     AdminTeacherViewModel viewModel;
+    Teacher teachersArray [];
     List<Teacher> teacherList = new ArrayList<>();
-    Set<Teacher> checkTeacherList = new HashSet<>();
 
 
 
@@ -68,10 +68,7 @@ public class AdminTeacherPageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         toolbarSetup();
-        binding.adminTeachersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.adminTeachersRecycler.setHasFixedSize(true);
-        adapter = new AdminTeacherRecyclerAdapter(getActivity());
-        binding.adminTeachersRecycler.setAdapter(adapter);
+        setRecyclerView();
         setTeacherList();
         clicks();
     }
@@ -85,6 +82,13 @@ public class AdminTeacherPageFragment extends Fragment {
                 Log.i("onChanged" , "onChanged Called");
             }
         });
+    }
+
+    public void setRecyclerView(){
+        binding.adminTeachersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.adminTeachersRecycler.setHasFixedSize(true);
+        adapter = new AdminTeacherRecyclerAdapter(getActivity());
+        binding.adminTeachersRecycler.setAdapter(adapter);
     }
 
 
@@ -129,7 +133,6 @@ public class AdminTeacherPageFragment extends Fragment {
         AddTeacherDialog addTeacherDialog = new AddTeacherDialog();
         addTeacherDialog.show(getChildFragmentManager() , "dialog");
     }
-
 
     private class navigation {
         public void teacherToMainPage(View view){

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/registrationFragment">
 
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.yousef.ta3leem.ui.UI.Registration.Fragments.RegistrationFragment"
+        tools:layout="@layout/registration_fragment"
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_adminMainPageFragment"
@@ -25,6 +27,7 @@
     <fragment
         android:id="@+id/adminMainPageFragment"
         android:name="com.yousef.ta3leem.ui.UI.Admin.Fragments.AdminMainPageFragment"
+        tools:layout="@layout/adminmainpage_fragment"
         android:label="AdminMainPageFragment" >
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminStudentPageFragment"
@@ -59,6 +62,7 @@
     <fragment
         android:id="@+id/adminStudentPageFragment"
         android:name="com.yousef.ta3leem.ui.UI.Admin.Fragments.AdminStudentPageFragment"
+        tools:layout="@layout/adminstudentspage_fragment"
         android:label="AdminStudentPageFragment" >
         <action
             android:id="@+id/action_adminStudentPageFragment_to_adminMainPageFragment"
@@ -66,6 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/adminTeacherPage"
+        tools:layout="@layout/adminteacherpage_fragment"
         android:name="com.yousef.ta3leem.ui.UI.Admin.Fragments.AdminTeacherPageFragment"
         android:label="AdminTeacherPage" >
         <action
@@ -75,6 +80,7 @@
     <fragment
         android:id="@+id/studentMainPage"
         android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.StudentMainPage"
+        tools:layout="@layout/studentmainpage_fragment"
         android:label="StudentMainPage" >
         <action
             android:id="@+id/action_studentMainPage_to_registrationFragment"
@@ -97,13 +103,23 @@
             app:nullable="true"
             android:defaultValue="@null"
             />
+        <argument
+            android:name="className"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"
+            />
         <action
-            android:id="@+id/action_studentMainPage_to_nav_graph2"
-            app:destination="@id/nav_graph_chat" />
+            android:id="@+id/action_studentMainPage_to_studentSubjectsPage"
+            app:destination="@id/studentSubjectsPage" />
+        <action
+            android:id="@+id/action_studentMainPage_to_channelFragment"
+            app:destination="@id/channelFragment" />
     </fragment>
     <fragment
         android:id="@+id/teacherMainPageFragment"
         android:name="com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherMainPageFragment"
+        tools:layout="@layout/teachermainpage_fragment"
         android:label="TeacherMainPageFragment" >
         <action
             android:id="@+id/action_teacherMainPageFragment_to_registrationFragment"
@@ -127,8 +143,70 @@
             android:defaultValue="@null"
             />
         <action
-            android:id="@+id/action_teacherMainPageFragment_to_nav_graph2"
-            app:destination="@id/nav_graph_chat" />
+            android:id="@+id/action_teacherMainPageFragment_to_channelFragment"
+            app:destination="@id/channelFragment" />
     </fragment>
-    <include app:graph="@navigation/chat_nav_graph" />
+    <fragment
+        android:id="@+id/studentSubjectsPage"
+        tools:layout="@layout/studentsubjectspage"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.StudentSubjectsPage"
+        android:label="StudentSubjectsPage" >
+        <action
+            android:id="@+id/action_studentSubjectsPage_to_studentMainPage"
+            app:destination="@id/studentMainPage" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/channelFragment"
+        android:name="com.yousef.ta3leem.Kotlin.ui.Channel.ChannelFragment"
+        android:label="fragment_channel"
+        tools:layout="@layout/fragment_channel" >
+        <action
+            android:id="@+id/action_channelFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_channelFragment_to_usersFragment"
+            app:destination="@id/usersFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popExitAnim="@anim/to_bottom" />
+        <action
+            android:id="@+id/action_channelFragment_to_studentMainPage"
+            app:destination="@id/studentMainPage" />
+        <action
+            android:id="@+id/action_channelFragment_to_teacherMainPageFragment"
+            app:destination="@id/teacherMainPageFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.yousef.ta3leem.Kotlin.ui.Chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="channelId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_chatFragment_to_channelFragment"
+            app:destination="@id/channelFragment"
+            app:popUpTo="@id/chatFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.yousef.ta3leem.Kotlin.ui.Users.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" >
+        <action
+            android:id="@+id/action_usersFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:popUpTo="@id/usersFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>

@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.yousef.ta3leem.Constants;
+import com.yousef.ta3leem.Data.FireBase.CallBacks.allTeachersFirebaseCallBack;
 import com.yousef.ta3leem.Data.FireBase.CallBacks.studentFireBaseCallBack;
 import com.yousef.ta3leem.Data.FireBase.CallBacks.teacherFireBaseCallBack;
 import com.yousef.ta3leem.Data.FireBase.FireBaseGet;
@@ -85,7 +86,7 @@ public class LoginViewModel extends AndroidViewModel {
                         }
                         else
                             image = student.getImage();
-                        nav.navigateToStudent(view , student.getName(), student.getId() , image);
+                        nav.navigateToStudent(view , student.getName(), student.getId() , image , student.getClassName());
                     }
                     else
                         Toast.makeText(getApplication(), Constants.WRONG_USERNAME_PASSWORD, Toast.LENGTH_SHORT).show();
@@ -123,5 +124,9 @@ public class LoginViewModel extends AndroidViewModel {
         editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
+    }
+
+    public void getAllTeachers (allTeachersFirebaseCallBack callBack){
+        repo.getTeachersOneTime(callBack);
     }
 }

@@ -187,12 +187,13 @@ public class LoginFragment extends Fragment {
             navController.navigate(action);
         }
 
-        public void navigateToStudent(View view , String name, String id , String image) {
+        public void navigateToStudent(View view , String name, String id , String image , String className) {
             NavController navController = Navigation.findNavController(view);
             RegistrationFragmentDirections.ActionRegistrationFragmentToStudentMainPage action = RegistrationFragmentDirections.actionRegistrationFragmentToStudentMainPage();
             action.setName(name);
             action.setImage(image);
             action.setId(id);
+            action.setClassName(className);
             navController.navigate(action);
         }
 
