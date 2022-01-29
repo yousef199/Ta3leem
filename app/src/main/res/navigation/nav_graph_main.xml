@@ -181,6 +181,10 @@
         <action
             android:id="@+id/action_channelFragment_to_teacherMainPageFragment"
             app:destination="@id/teacherMainPageFragment" />
+        <argument
+            android:name="login"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
     <fragment

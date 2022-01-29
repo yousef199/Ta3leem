@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.TeachermainpageFragmentBinding;
+import com.yousef.ta3leem.ui.UI.Registration.Fragments.RegistrationFragmentDirections;
 
 import java.util.Map;
 
@@ -193,7 +194,7 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
         binding.messagesImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new navigation().navigateToMessagingPage(view);
+                new navigation().navigateToMessagingPage(view , "teacher");
             }
         });
     }
@@ -205,9 +206,11 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_teacherMainPageFragment_to_registrationFragment);
         }
-        public void navigateToMessagingPage(View view){
+        public void navigateToMessagingPage(View view , String login){
             NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_teacherMainPageFragment_to_channelFragment);
+            TeacherMainPageFragmentDirections.ActionTeacherMainPageFragmentToChannelFragment action = TeacherMainPageFragmentDirections.actionTeacherMainPageFragmentToChannelFragment(login);
+            action.setLogin(login);
+            navController.navigate(action);
         }
 
     }

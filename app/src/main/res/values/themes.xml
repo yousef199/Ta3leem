@@ -16,7 +16,7 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
-    <style name="AlertDialogStyle" parent="Theme.AppCompat.Dialog">
+    <style name="AlertDialogStyle">
         <item name="fontFamily">@font/cairo_regular</item>
         <item name="android:layoutDirection">rtl</item>
     </style>
@@ -45,5 +45,9 @@
     <style name="NavigationDrawerStyle">
         <item name="android:textSize">17sp</item><!-- text size in menu-->
         <item name="android:textStyle">bold</item>
+    </style>
+    <style name="collapsedToolbarTitle" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:typeface">@font/cairo_semibold</item>
+        <item name="android:textSize">40sp</item>
     </style>
 </resources>

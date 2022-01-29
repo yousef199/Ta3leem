@@ -26,6 +26,7 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.TeacherSubject;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.StudentmainpageFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Student.ViewModels.StudentViewModel;
+import com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherMainPageFragmentDirections;
 
 import java.util.List;
 import java.util.Map;
@@ -224,7 +225,7 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
         binding.messagesImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new navigation().navigateToMessagingPage(view);
+                new navigation().navigateToMessagingPage(view , "student");
             }
         });
 
@@ -240,7 +241,9 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
                         System.out.println("Size :" + m.size());
                         for(Map.Entry<String , List<String>> m2 : m.entrySet()){
                             System.out.println("Key: " + m2.getKey() + "Value: " + m2.getValue().get(0) + "Value 2: " + m2.getValue().get(1));
+
                         }
+                        new navigation().navigateToSubjectsPage(view);
                     }
                 });
             }
@@ -254,9 +257,11 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
             NavController navController = Navigation.findNavController(view);
             navController.navigate(R.id.action_studentMainPage_to_registrationFragment);
         }
-        public void navigateToMessagingPage(View view){
+        public void navigateToMessagingPage(View view , String login){
             NavController navController = Navigation.findNavController(view);
-            navController.navigate(R.id.action_studentMainPage_to_channelFragment);
+            StudentMainPageDirections.ActionStudentMainPageToChannelFragment action = StudentMainPageDirections.actionStudentMainPageToChannelFragment(login);
+            action.setLogin(login);
+            navController.navigate(action);
         }
 
         public void navigateToSubjectsPage(View view){

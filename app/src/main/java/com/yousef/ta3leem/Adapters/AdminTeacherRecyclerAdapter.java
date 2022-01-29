@@ -50,10 +50,17 @@ public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeach
     //set the value for the elements from the list current element
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         Teacher teacher = teacherList.get(position);
-        Glide.with(context)
-                .load(teacher.getImage())
-                .centerCrop()
-                .into(holder.circleImageView);
+        if(teacher.getImage().equals("null")){
+            Glide.with(context)
+                    .load(R.drawable.user_icon)
+                    .centerCrop()
+                    .into(holder.circleImageView);
+        }
+        else
+            Glide.with(context)
+                    .load(teacher.getImage())
+                    .centerCrop()
+                    .into(holder.circleImageView);
 
         holder.textView.setText(teacher.getName());
     }

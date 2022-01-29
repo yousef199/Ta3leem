@@ -16,12 +16,15 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStudentRecyclerAdapter.viewHolder>  {
     List<Student> studentList = new ArrayList<>();
+    Set<Student> checkList = new HashSet<>();
     Context context;
 
     public AdminStudentRecyclerAdapter(Context context){
@@ -40,10 +43,17 @@ public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStude
     //set the value for the elements from the list current element
     public void onBindViewHolder(@NonNull AdminStudentRecyclerAdapter.viewHolder holder, int position) {
         Student student = studentList.get(position);
-        Glide.with(context)
-                .load(student.getImage())
-                .centerCrop()
-                .into(holder.circleImageView);
+        if(student.getImage().equals("null")){
+            Glide.with(context)
+                    .load(R.drawable.user_icon)
+                    .centerCrop()
+                    .into(holder.circleImageView);
+        }
+        else
+            Glide.with(context)
+                    .load(student.getImage())
+                    .centerCrop()
+                    .into(holder.circleImageView);
 
         holder.textView.setText(student.getName());
     }
@@ -56,7 +66,10 @@ public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStude
     public void setStudentList(List<Student> studentList){
         this.studentList.clear();
         for (Student student : studentList){
+            if(!(checkList.contains(student))){
                 this.studentList.add(student);
+                checkList.add(student);
+            }
         }
         notifyDataSetChanged();
     }

@@ -32,7 +32,7 @@ import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
 
 class ChannelFragment : Fragment() {
-
+    private val args: ChannelFragmentArgs by navArgs()
 
     private var _binding: FragmentChannelBinding? = null
     private val binding get() = _binding!!
@@ -40,10 +40,7 @@ class ChannelFragment : Fragment() {
     private val client = ChatClient.instance()
     private lateinit var user: User
 
-//    private val sharedPreferences:SharedPreferences = requireActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
-//    val id : String? = sharedPreferences.getString("id" , null)
-//    val name : String? = sharedPreferences.getString("name" , null);
-//    val image : String? = sharedPreferences.getString("image" , null);
+    lateinit var sharedPreferences:SharedPreferences
 
 
     @SuppressLint("WrongConstant")
@@ -53,10 +50,15 @@ class ChannelFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentChannelBinding.inflate(inflater, container, false)
+        sharedPreferences = requireActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
+        val id  = sharedPreferences.getString("id" , null)
+        val name  = sharedPreferences.getString("name" , null);
+        val image  = sharedPreferences.getString("image" , null);
+        val login = args.login
 
-        setupUser()
+        setupUser(id , name , image)
         setupChannels()
-        setupDrawer()
+        setupDrawer(login)
 
         binding.channelsView.setChannelDeleteClickListener { channel ->
             deleteChannel(channel)
@@ -78,18 +80,18 @@ class ChannelFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupUser() {
-//        if(id != null && image != null && name != null) {
+    private fun setupUser(id:String? , name:String? , image:String?) {
+        if(id != null && image != null && name != null) {
             if (client.getCurrentUser() == null) {
                 user = User(
-                        id = "12345",
+                        id =id,
                         extraData = mutableMapOf(
-                            "name" to "yousef",
+                            "name" to name,
                             "country" to "Jordan",
-//                            "image" to image
+                            "image" to image
                         )
                     )
-                }
+                }}
 
                 val token = client.devToken(user.id)
                 client.connectUser(
@@ -122,10 +124,10 @@ class ChannelFragment : Fragment() {
         listViewModel.bindView(binding.channelsView, viewLifecycleOwner)
     }
 
-    private fun setupDrawer() {
+    private fun setupDrawer(login:String?) {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.logout_menu) {
-                logout()
+                logout(login)
             }
             false
         }
@@ -149,11 +151,15 @@ class ChannelFragment : Fragment() {
         }
     }
 
-    private fun logout() {
+    private fun logout(login: String?) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             client.disconnect()
-            findNavController().navigate(R.id.action_channelFragment_to_studentMainPage)
+            if(login.equals("student")){
+                findNavController().navigate(R.id.action_channelFragment_to_studentMainPage)
+            }
+            else
+                findNavController().navigate(R.id.action_channelFragment_to_teacherMainPageFragment)
             showToast("Logged out successfully")
         }
         builder.setNegativeButton("No") { _, _ -> }
