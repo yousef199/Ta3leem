@@ -29,7 +29,7 @@ public class FireBaseAdd {
 
     public void addClassesToTeacher(String id, ClassesSubjects classes) {
             dataBase = FirebaseDatabase.getInstance().getReference(Constants.TEACHER_FIREBASE_NAME).child(id).child("classes").child(classes.getClassName());
-            dataBase.setValue(classes);
+            dataBase.setValue(classes.getSubjects());
     }
 
     public void addNewClass(String className, String Name , List<String> Subjects) {

@@ -151,7 +151,7 @@
                     android:layout_columnWeight="1">
 
                     <ImageView
-                        android:id="@+id/subjectsImageView"
+                        android:id="@+id/classesImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:elevation="10dp"
@@ -171,13 +171,13 @@
                         android:layout_marginBottom="8dp"
                         android:elevation="10dp"
                         android:fontFamily="@font/cairo_semibold"
-                        android:text="المواد"
+                        android:text="الصفوف"
                         android:textColor="@color/black"
                         style="@style/semi_bold_text"
                         android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/subjectsImageView"
-                        app:layout_constraintEnd_toEndOf="@+id/subjectsImageView"
-                        app:layout_constraintStart_toStartOf="@+id/subjectsImageView" />
+                        app:layout_constraintBottom_toBottomOf="@+id/classesImageView"
+                        app:layout_constraintEnd_toEndOf="@+id/classesImageView"
+                        app:layout_constraintStart_toStartOf="@+id/classesImageView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

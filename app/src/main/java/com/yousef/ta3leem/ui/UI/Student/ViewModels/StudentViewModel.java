@@ -20,11 +20,11 @@ public class StudentViewModel extends AndroidViewModel {
         repo = new Repo(application);
     }
 
-    public void getSudentClassTeachers(String className, teacherSubjectCallBack callback){
-        repo.getStudentClassTeachers(className,callback);
+    public void getStudentSubjectPageInfo(String className, teacherSubjectCallBack callback){
+        repo.getStudentSubjectPageInfo(className,callback);
     }
 
-    public MutableLiveData<Map<String , List<String>>> observeStudentClassTeachers(String className){
-        return repo.observeStudentClassTeacher(className);
+    public MutableLiveData<Map<String , List<String>>> observeStudentStudentSubjectPageInfo(String className){
+        return repo.observeStudentSubjectPageInfo(className);
     }
 }

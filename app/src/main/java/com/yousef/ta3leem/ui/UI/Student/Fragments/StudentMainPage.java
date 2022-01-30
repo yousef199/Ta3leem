@@ -26,9 +26,7 @@ import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.TeacherSubject;
 import com.yousef.ta3leem.R;
 import com.yousef.ta3leem.databinding.StudentmainpageFragmentBinding;
 import com.yousef.ta3leem.ui.UI.Student.ViewModels.StudentViewModel;
-import com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherMainPageFragmentDirections;
 
-import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -233,7 +231,7 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
             @Override
             public void onClick(View view) {
                 //cache the student subjects info
-                studentViewModel.getSudentClassTeachers(className, new teacherSubjectCallBack() {
+                studentViewModel.getStudentSubjectPageInfo(className, new teacherSubjectCallBack() {
                     @Override
                     public void onCallBack(TeacherSubject teacherSubject) {
                         new navigation().navigateToSubjectsPage(view);

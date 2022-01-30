@@ -197,6 +197,13 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
                 new navigation().navigateToMessagingPage(view , "teacher");
             }
         });
+
+        binding.classesImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new navigation().navigateToClassesPage(view);
+            }
+        });
     }
 
     //inner classes
@@ -211,6 +218,12 @@ public class TeacherMainPageFragment extends Fragment implements NavigationView.
             TeacherMainPageFragmentDirections.ActionTeacherMainPageFragmentToChannelFragment action = TeacherMainPageFragmentDirections.actionTeacherMainPageFragmentToChannelFragment(login);
             action.setLogin(login);
             navController.navigate(action);
+        }
+
+        public void navigateToClassesPage(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_teacherMainPageFragment_to_teacherClassesPage);
+
         }
 
     }

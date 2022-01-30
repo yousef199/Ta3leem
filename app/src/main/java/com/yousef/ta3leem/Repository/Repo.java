@@ -143,7 +143,7 @@ public class Repo {
     }
 
     public void getStudentsOneTime(allStudentsFireBaseCallBack callBack){
-        dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
+        dataBase = firebaseDatabase.getReference().child(Constants.STUDENT_FIREBASE_NAME);
         List<Student> studentsList = new ArrayList<>();
         dataBase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -159,10 +159,9 @@ public class Repo {
         });
     }
 
-    public MutableLiveData<Map<String , List<String>>> observeStudentClassTeacher(String className){
+    public MutableLiveData<Map<String , List<String>>> observeStudentSubjectPageInfo(String className){
         dataBase = firebaseDatabase.getReference().child(Constants.CLASSES_FIREBASE_NAME);
         Query query = dataBase.orderByKey().equalTo(className);
-        List<String> subjects = new ArrayList<>();
         Map<String , List<String>> teachers = new HashMap<>();
         MutableLiveData<Map<String , List<String>>> m = new MutableLiveData<>();
         query.addValueEventListener(new ValueEventListener() {
@@ -171,6 +170,7 @@ public class Repo {
                 if (snapshot.exists()){
                     for(DataSnapshot s : snapshot.getChildren() ){
                         for(DataSnapshot snapshot1 : s.getChildren()){
+                            List<String> subjects = new ArrayList<>();
                             for(int i = 0 ; i< snapshot1.getChildrenCount() ; i++){
                                 subjects.add(snapshot1.child(String.valueOf(i)).getValue(String.class));
                             }
@@ -189,18 +189,18 @@ public class Repo {
         return m;
     }
 
-    public void getStudentClassTeachers(String className , teacherSubjectCallBack callBack){
+    public void getStudentSubjectPageInfo(String className , teacherSubjectCallBack callBack){
         dataBase = firebaseDatabase.getReference().child(Constants.CLASSES_FIREBASE_NAME);
         Query query = dataBase.orderByKey().equalTo(className);
         query.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             TeacherSubject teacherSubject = new TeacherSubject();
-            List<String> subjects = new ArrayList<>();
             Map<String , List<String>> teachers = new HashMap<>();
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
                     for(DataSnapshot snapshot : task.getResult().getChildren() ){
                         for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                            List<String> subjects = new ArrayList<>();
                             for(int i = 0 ; i< snapshot1.getChildrenCount() ; i++){
                               subjects.add(snapshot1.child(String.valueOf(i)).getValue(String.class));
                             }
@@ -213,6 +213,35 @@ public class Repo {
             }
         });
 
+    }
+
+    public MutableLiveData<Map<String, List<String>>> getTeacherClassesInfo(String id){
+        dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME).child(id).child("classes");
+        MutableLiveData<Map<String, List<String>>> liveData = new MutableLiveData<>();
+        Map<String , List<String>> classSubjectMap = new HashMap<>();
+
+        dataBase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot s1 : snapshot.getChildren()){
+                        List<String> subjectList = new ArrayList<>();
+                            for(int i = 0 ; i< s1.getChildrenCount() ; i++) {
+                                subjectList.add(s1.child(String.valueOf(i)).getValue(String.class));
+                            }
+                            classSubjectMap.put(s1.getKey() , subjectList);
+                            System.out.println("Class Name: " + s1.getKey() + "Subject: " + subjectList.get(0));
+                    }
+                }
+                liveData.setValue(classSubjectMap);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return liveData;
     }
 }
 

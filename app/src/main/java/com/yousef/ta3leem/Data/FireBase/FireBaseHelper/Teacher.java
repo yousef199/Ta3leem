@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Teacher implements Cloneable{
     String name , id , age, image , password = "not set";
-    HashMap<String, ClassesSubjects> classes;
+    HashMap<String, List<String>> classes;
 
     public Teacher() {
     }
@@ -24,15 +24,15 @@ public class Teacher implements Cloneable{
         this.classes = teacher.classes;
     }
 
-    public HashMap<String, ClassesSubjects> getClasses() {
+    public HashMap<String, List<String>> getClasses() {
         return classes;
     }
 
-    public void setClasses(HashMap<String, ClassesSubjects> classes) {
+    public void setClasses(HashMap<String, List<String>> classes) {
         this.classes = classes;
     }
 
-    public Teacher(String name, String id, String age , String image,List<ClassesSubjects> classesSubjectsList) {
+    public Teacher(String name, String id, String age , String image, List<ClassesSubjects> classesSubjectsList) {
         this.name = name;
         this.id = id;
         this.age = age;

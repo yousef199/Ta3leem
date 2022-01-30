@@ -32,31 +32,6 @@ public class FireBaseGet {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference dataBase;
 
-    public void getTeachers(allTeachersFirebaseCallBack callBack){
-        dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
-        dataBase.addValueEventListener(new ValueEventListener() {
-            List<Teacher> allTeachers = new ArrayList<>();
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    exits = true;
-                    Iterable<DataSnapshot> children = snapshot.getChildren();
-                    for (DataSnapshot dataSnapshot : children) {
-                        allTeachers.add(dataSnapshot.getValue(Teacher.class));
-                    }
-                }
-                else exits = false;
-
-                callBack.allTeachersOnCallBack(allTeachers);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     public void getTeacher(String id , teacherFireBaseCallBack callBack){
         dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
         Query getTeacher = dataBase.orderByChild("id").equalTo(id);
@@ -110,22 +85,6 @@ public class FireBaseGet {
 
     }
 
-    public void getTeachers2(allTeachersFirebaseCallBack callBack){
-        dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME);
-        dataBase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            List<Teacher> allTeachers = new ArrayList<>();
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful()){
-                        Iterable<DataSnapshot> children = task.getResult().getChildren();
-                        for (DataSnapshot dataSnapshot : children) {
-                            allTeachers.add(dataSnapshot.getValue(Teacher.class));
-                        }
-                    }
-                callBack.allTeachersOnCallBack(allTeachers);
-                }
-        });
-    }
     public boolean isExits() {
         return exits;
     }

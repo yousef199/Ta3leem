@@ -4,38 +4,38 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllSubjectsRecyclerAdapter extends RecyclerView.Adapter<AllSubjectsRecyclerAdapter.viewHolder> {
+public class StudentAllSubjectsRecyclerAdapter extends RecyclerView.Adapter<StudentAllSubjectsRecyclerAdapter.viewHolder> {
     List<String> Subjects = new ArrayList<>();
     List<String> Names = new ArrayList<>();
     Context context;
 
-    public AllSubjectsRecyclerAdapter(Context context) {
+    public StudentAllSubjectsRecyclerAdapter(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
     //inflate the layout
-    public AllSubjectsRecyclerAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StudentAllSubjectsRecyclerAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.subjectcarddesign, parent, false);
-        return new AllSubjectsRecyclerAdapter.viewHolder(itemView);
+        return new StudentAllSubjectsRecyclerAdapter.viewHolder(itemView);
     }
 
     @Override
     //set the value for the elements from the list current element
-    public void onBindViewHolder(@NonNull AllSubjectsRecyclerAdapter.viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StudentAllSubjectsRecyclerAdapter.viewHolder holder, int position) {
         String subject = Subjects.get(position);
         String name = Names.get(position);
 
@@ -89,12 +89,14 @@ public class AllSubjectsRecyclerAdapter extends RecyclerView.Adapter<AllSubjects
     public class viewHolder extends RecyclerView.ViewHolder{
         ImageView subjectImage;
         TextView subjectName , teacherName;
+        Button enterButton;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             subjectImage = (ImageView) itemView.findViewById(R.id.subjectCardImage);
             subjectName = (TextView) itemView.findViewById(R.id.subjectCardName);
             teacherName = (TextView) itemView.findViewById(R.id.subjectCardTeacherName);
+            enterButton = (Button) itemView.findViewById(R.id.subjectEnterButton);
         }
     }
 }

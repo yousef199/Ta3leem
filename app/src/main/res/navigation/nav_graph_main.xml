@@ -145,6 +145,9 @@
         <action
             android:id="@+id/action_teacherMainPageFragment_to_channelFragment"
             app:destination="@id/channelFragment" />
+        <action
+            android:id="@+id/action_teacherMainPageFragment_to_teacherClassesPage"
+            app:destination="@id/teacherClassesPage" />
     </fragment>
     <fragment
         android:id="@+id/studentSubjectsPage"
@@ -211,6 +214,15 @@
             app:destination="@id/chatFragment"
             app:popUpTo="@id/usersFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherClassesPage"
+        android:name="com.yousef.ta3leem.ui.UI.Teacher.Fragments.teacherClassesPage"
+        tools:layout="@layout/teacherclassespage"
+        android:label="teacherClassesPage" >
+        <action
+            android:id="@+id/action_teacherClassesPage_to_teacherMainPageFragment"
+            app:destination="@id/teacherMainPageFragment" />
     </fragment>
 
 </navigation>
