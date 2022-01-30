@@ -236,13 +236,6 @@ public class StudentMainPage extends Fragment implements NavigationView.OnNaviga
                 studentViewModel.getSudentClassTeachers(className, new teacherSubjectCallBack() {
                     @Override
                     public void onCallBack(TeacherSubject teacherSubject) {
-                        int counter = 0;
-                        Map<String , List<String>> m= teacherSubject.getTeacherSubjects();
-                        System.out.println("Size :" + m.size());
-                        for(Map.Entry<String , List<String>> m2 : m.entrySet()){
-                            System.out.println("Key: " + m2.getKey() + "Value: " + m2.getValue().get(0) + "Value 2: " + m2.getValue().get(1));
-
-                        }
                         new navigation().navigateToSubjectsPage(view);
                     }
                 });

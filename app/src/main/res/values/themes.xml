@@ -47,7 +47,7 @@
         <item name="android:textStyle">bold</item>
     </style>
     <style name="collapsedToolbarTitle" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:typeface">@font/cairo_semibold</item>
+
         <item name="android:textSize">40sp</item>
     </style>
 </resources>

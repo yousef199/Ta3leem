@@ -169,11 +169,13 @@ public class Repo {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    for(DataSnapshot snapshot1 : snapshot.getChildren() ){
+                    for(DataSnapshot s : snapshot.getChildren() ){
+                        for(DataSnapshot snapshot1 : s.getChildren()){
                             for(int i = 0 ; i< snapshot1.getChildrenCount() ; i++){
                                 subjects.add(snapshot1.child(String.valueOf(i)).getValue(String.class));
                             }
                             teachers.put(snapshot1.getKey() , subjects);
+                        }
                     }
                 }
                 m.setValue(teachers);
