@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_Student"
+        android:icon="@drawable/home_bottom_nav"
+        android:title="الرئيسيه"
+        />
+    <item
+        android:id="@+id/exams_Student"
+        android:icon="@drawable/exam_bottom_nav"
+        android:title="الامتحانات"
+        />
+    <item
+        android:id="@+id/classes_Student"
+        android:icon="@drawable/classes_bottom_nav"
+        android:title="الدروس"
+        />
+    <item
+        android:id="@+id/homework_Student"
+        android:icon="@drawable/homework_bottom_nav"
+        android:title="الواجبات"
+        />
+</menu>

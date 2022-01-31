@@ -157,6 +157,9 @@
         <action
             android:id="@+id/action_studentSubjectsPage_to_studentMainPage"
             app:destination="@id/studentMainPage" />
+        <action
+            android:id="@+id/action_studentSubjectsPage_to_studentClassPage"
+            app:destination="@id/studentClassPage" />
     </fragment>
 
     <fragment
@@ -223,6 +226,15 @@
         <action
             android:id="@+id/action_teacherClassesPage_to_teacherMainPageFragment"
             app:destination="@id/teacherMainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentClassPage"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.StudentClassPage"
+        tools:layout="@layout/studentclassmainpage"
+        android:label="StudentClassPage" >
+        <action
+            android:id="@+id/action_studentClassPage_to_studentSubjectsPage"
+            app:destination="@id/studentSubjectsPage" />
     </fragment>
 
 </navigation>

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.yousef.ta3leem.Adapters.StudentAllSubjectsRecyclerAdapter;
@@ -48,6 +50,7 @@ public class StudentSubjectsPage extends Fragment {
         setRecycler();
         toolbarSetup();
         getNamesAndSubjects();
+
     }
 
     public void setRecycler(){
@@ -94,6 +97,14 @@ public class StudentSubjectsPage extends Fragment {
         for (Map.Entry<String , ?> m : prefValue.entrySet()){
             if(m.getKey().equals("className"))
                 className = (String) m.getValue();
+        }
+    }
+
+
+    public static class navigation {
+        public void navigateToSubjectMainPage(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_studentSubjectsPage_to_studentClassPage);
         }
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/student_nav"
+    app:startDestination="@id/home_Student">
+
+    <fragment
+        android:id="@+id/home_Student"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.Home_Student"
+        android:label="fragment_home__student"
+        tools:layout="@layout/fragment_home__student" />
+    <fragment
+        android:id="@+id/exams_Student"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.Exams_Student"
+        android:label="fragment_exams__student"
+        tools:layout="@layout/fragment_exams__student" />
+    <fragment
+        android:id="@+id/classes_Student"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.Classes_Student"
+        android:label="fragment_classes__student"
+        tools:layout="@layout/fragment_classes__student" />
+    <fragment
+        android:id="@+id/homework_Student"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.Homework_Student"
+        android:label="fragment_homeworks__student"
+        tools:layout="@layout/fragment_homeworks__student" />
+</navigation>

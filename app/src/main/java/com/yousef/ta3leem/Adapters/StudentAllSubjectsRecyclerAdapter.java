@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yousef.ta3leem.R;
+import com.yousef.ta3leem.ui.UI.Student.Fragments.StudentSubjectsPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +98,14 @@ public class StudentAllSubjectsRecyclerAdapter extends RecyclerView.Adapter<Stud
             subjectName = (TextView) itemView.findViewById(R.id.subjectCardName);
             teacherName = (TextView) itemView.findViewById(R.id.subjectCardTeacherName);
             enterButton = (Button) itemView.findViewById(R.id.subjectEnterButton);
+
+            enterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new StudentSubjectsPage.navigation().navigateToSubjectMainPage(view);
+                }
+            });
         }
+
     }
 }
