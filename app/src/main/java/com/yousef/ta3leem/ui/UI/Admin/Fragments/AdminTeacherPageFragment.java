@@ -2,6 +2,7 @@ package com.yousef.ta3leem.ui.UI.Admin.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +14,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +47,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class AdminTeacherPageFragment extends Fragment {
     AdminteacherpageFragmentBinding binding;
@@ -88,6 +94,7 @@ public class AdminTeacherPageFragment extends Fragment {
         binding.adminTeachersRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.adminTeachersRecycler.setHasFixedSize(true);
         adapter = new AdminTeacherRecyclerAdapter(getActivity());
+        new ItemTouchHelper(itemTouchCallback).attachToRecyclerView(binding.adminTeachersRecycler);
         binding.adminTeachersRecycler.setAdapter(adapter);
     }
 
@@ -111,6 +118,28 @@ public class AdminTeacherPageFragment extends Fragment {
         inflater.inflate(R.menu.search_menu , menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0 , ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            adapter.deleteTeacher(viewHolder.getAbsoluteAdapterPosition());
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(getActivity() , R.color.red))
+                    .addSwipeLeftActionIcon(R.drawable.delete_icon)
+                    .create()
+                    .decorate();
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 
     //onClicks
     private void clicks() {

@@ -156,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:elevation="10dp"
                         android:clickable="true"
-                        android:src="@drawable/subjects_asset"
+                        android:src="@drawable/classes_icon"
                         android:foreground="?attr/selectableItemBackground"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

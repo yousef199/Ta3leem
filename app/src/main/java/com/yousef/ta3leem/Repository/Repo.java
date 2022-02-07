@@ -14,9 +14,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.yousef.ta3leem.Constants;
 import com.yousef.ta3leem.Data.FireBase.CallBacks.allTeachersFirebaseCallBack;
 import com.yousef.ta3leem.Data.FireBase.FireBaseAdd;
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesID;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesSubjects;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
@@ -31,12 +34,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 public class Repo {
     AdminDAO adminDAO;
     LiveData<List<Admin>> adminList;
     FireBaseAdd fireBaseAdd = new FireBaseAdd();
+    StorageReference storageReference;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference dataBase;
 
@@ -61,8 +66,8 @@ public class Repo {
         fireBaseAdd.addTeacher(teacher);
     }
 
-    public void addClass(String classname, String Name , List<String> Subjects){
-        fireBaseAdd.addNewClass(classname , Name, Subjects);
+    public void addClass(String classname,String id, String Name , List<String> Subjects){
+        fireBaseAdd.addNewClass(classname ,id,Name, Subjects);
     }
 
     public void addStudentFireBase(Student student){
@@ -167,16 +172,17 @@ public class Repo {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                teachers.clear();
                 if (snapshot.exists()){
                     for(DataSnapshot s : snapshot.getChildren() ){
-                        for(DataSnapshot snapshot1 : s.getChildren()){
-                            List<String> subjects = new ArrayList<>();
-                            for(int i = 0 ; i< snapshot1.getChildrenCount() ; i++){
-                                subjects.add(snapshot1.child(String.valueOf(i)).getValue(String.class));
-                            }
-                            teachers.put(snapshot1.getKey() , subjects);
+                        for(DataSnapshot snapshot1 : s.getChildren()) {
+                            System.out.println("First snapshot count: " + s.getChildrenCount());
+                            ClassesID classesID;
+                            classesID = snapshot1.getValue(ClassesID.class);
+                            System.out.println(classesID.getId());
+                            teachers.put(snapshot1.getKey(), classesID.getClasses());
                         }
-                    }
+                        }
                 }
                 m.setValue(teachers);
             }
@@ -200,11 +206,9 @@ public class Repo {
                 if (task.isSuccessful()) {
                     for(DataSnapshot snapshot : task.getResult().getChildren() ){
                         for(DataSnapshot snapshot1 : snapshot.getChildren()){
-                            List<String> subjects = new ArrayList<>();
-                            for(int i = 0 ; i< snapshot1.getChildrenCount() ; i++){
-                              subjects.add(snapshot1.child(String.valueOf(i)).getValue(String.class));
-                            }
-                            teachers.put(snapshot1.getKey() , subjects);
+                            ClassesID classesID;
+                            classesID = snapshot1.getValue(ClassesID.class);
+                            teachers.put(snapshot1.getKey() , classesID.getClasses());
                         }
                     }
                     teacherSubject.setTeacherSubjects(teachers);
@@ -218,11 +222,12 @@ public class Repo {
     public MutableLiveData<Map<String, List<String>>> getTeacherClassesInfo(String id){
         dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME).child(id).child("classes");
         MutableLiveData<Map<String, List<String>>> liveData = new MutableLiveData<>();
-        Map<String , List<String>> classSubjectMap = new HashMap<>();
+        Map<String , List<String>> classSubjectMap = new HashMap<>() ;
 
         dataBase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                classSubjectMap.clear();
                 if(snapshot.exists()){
                     for(DataSnapshot s1 : snapshot.getChildren()){
                         List<String> subjectList = new ArrayList<>();
@@ -242,6 +247,44 @@ public class Repo {
             }
         });
         return liveData;
+    }
+
+    public void deleteTeacher(String id){
+        dataBase = firebaseDatabase.getReference().child(Constants.TEACHER_FIREBASE_NAME).child(id);
+        dataBase.removeValue();
+
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(Constants.CLASSES_FIREBASE_NAME);
+        Query query = databaseReference.orderByChild(id);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                        for(DataSnapshot snapshot2 : snapshot1.getChildren()){
+                            ClassesID classesID;
+                            classesID = snapshot2.getValue(ClassesID.class);
+                            if(classesID.getId().equals(id)){
+                                DatabaseReference reference = firebaseDatabase.getReference().child(Constants.CLASSES_FIREBASE_NAME).child(snapshot1.getKey()).child(snapshot2.getKey());
+                                reference.removeValue();
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void deleteStudent(String id){
+        dataBase = firebaseDatabase.getReference().child(Constants.STUDENT_FIREBASE_NAME).child(id);
+        dataBase.removeValue();
+    }
+
+    public void uploadVideo(){
+
     }
 }
 

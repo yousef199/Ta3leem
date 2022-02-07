@@ -22,11 +22,10 @@ import com.yousef.ta3leem.databinding.StudentclassmainpageBinding
 /**
  * This class sets up the bottom navigation view for each subject page with the student_nav graph
  */
-class StudentClassPage : Fragment() {
+class StudentSubjectMainPage : Fragment() {
     private var _binding: StudentclassmainpageBinding? = null
     private val binding get() = _binding!!
 
-    @SuppressLint("WrongConstant")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +33,7 @@ class StudentClassPage : Fragment() {
     ): View? {
         _binding = StudentclassmainpageBinding.inflate(inflater , container , false);
 
+        binding.bottomNavigationView.itemIconTintList = null
         return binding.root
     }
 

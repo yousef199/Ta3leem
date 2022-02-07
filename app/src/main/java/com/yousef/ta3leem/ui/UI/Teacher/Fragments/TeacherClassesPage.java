@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.yousef.ta3leem.Adapters.StudentAllSubjectsRecyclerAdapter;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class teacherClassesPage extends Fragment {
+public class TeacherClassesPage extends Fragment {
     TeacherclassespageBinding binding;
     TeacherViewModel viewModel;
     String id;
@@ -41,7 +43,6 @@ public class teacherClassesPage extends Fragment {
         binding = TeacherclassespageBinding.inflate(inflater , container , false);
         View view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(TeacherViewModel.class);
-        binding.teacherClassesToolBar.setNavigationIcon(R.drawable.back_icon);
         return view;
     }
 
@@ -67,6 +68,8 @@ public class teacherClassesPage extends Fragment {
             @Override
             public void onChanged(Map<String, List<String>> stringListMap) {
                 Map<String , List<String>> m= stringListMap;
+                classes.clear();
+                subjects.clear();
                 System.out.println("Size :" + m.size());
                 for(Map.Entry<String , List<String>> m2 : m.entrySet()){
                     for(String s:m2.getValue()){
@@ -86,8 +89,6 @@ public class teacherClassesPage extends Fragment {
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         //Setting the toolbar
         appCompatActivity.setSupportActionBar(binding.teacherClassesToolBar);
-        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         binding.teacherClassesToolBar.setTitleTextAppearance(getActivity() , R.style.semi_bold_text);
         setHasOptionsMenu(true);
     }
@@ -99,6 +100,14 @@ public class teacherClassesPage extends Fragment {
         for (Map.Entry<String , ?> m : prefValue.entrySet()){
             if(m.getKey().equals("id"))
                 id = (String) m.getValue();
+        }
+    }
+
+    //inner classes
+    public static class navigation{
+        public void navigateToClassPage(View view){
+            NavController navController = Navigation.findNavController(view);
+            navController.navigate(R.id.action_teacherClassesPage_to_teacherClassMainPage);
         }
     }
 }

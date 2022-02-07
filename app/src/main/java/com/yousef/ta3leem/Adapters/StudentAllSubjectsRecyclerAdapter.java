@@ -17,6 +17,8 @@ import com.yousef.ta3leem.ui.UI.Student.Fragments.StudentSubjectsPage;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.auth.Subject;
+
 public class StudentAllSubjectsRecyclerAdapter extends RecyclerView.Adapter<StudentAllSubjectsRecyclerAdapter.viewHolder> {
     List<String> Subjects = new ArrayList<>();
     List<String> Names = new ArrayList<>();
@@ -75,8 +77,8 @@ public class StudentAllSubjectsRecyclerAdapter extends RecyclerView.Adapter<Stud
     }
 
     public void setSubjectsList(List<String> subjectsNames, List<String> teachersNames) {
-//        subjectsNames.clear();
-//        teachersNames.clear();
+        Subjects.clear();
+        Names.clear();
         for (String s : subjectsNames) {
             Subjects.add(s);
         }

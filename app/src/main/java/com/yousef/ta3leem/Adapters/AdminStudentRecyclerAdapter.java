@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
 import com.yousef.ta3leem.R;
+import com.yousef.ta3leem.Repository.Repo;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStudentRecyclerAdapter.viewHolder>  {
     List<Student> studentList = new ArrayList<>();
     Set<Student> checkList = new HashSet<>();
+    Repo repo = new Repo();
     Context context;
 
     public AdminStudentRecyclerAdapter(Context context){
@@ -56,6 +58,8 @@ public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStude
                     .into(holder.circleImageView);
 
         holder.textView.setText(student.getName());
+        holder.id.setText(student.getId());
+
     }
 
     @Override
@@ -74,16 +78,21 @@ public class AdminStudentRecyclerAdapter extends RecyclerView.Adapter<AdminStude
         notifyDataSetChanged();
     }
 
+    public void deleteStudent(int i){
+        repo.deleteStudent(studentList.get(i).getId());
+        notifyDataSetChanged();
+    }
+
     public class viewHolder extends RecyclerView.ViewHolder{
         CircleImageView circleImageView;
-        TextView textView;
+        TextView textView , id;
 
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.recyclerStudentImage);
             textView = itemView.findViewById(R.id.recyclerStudentName);
-
+            id = itemView.findViewById(R.id.recyclerStudentID);
         }
     }
 }

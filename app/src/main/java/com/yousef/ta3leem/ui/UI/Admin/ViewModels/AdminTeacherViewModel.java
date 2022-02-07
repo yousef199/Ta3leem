@@ -22,4 +22,8 @@ public class AdminTeacherViewModel extends AndroidViewModel {
     public MutableLiveData<List<Teacher>> getTeachersList(){
         return repo.getTeachersFireBase();
     }
+
+    public void deleteTeacher(String id){
+        repo.deleteTeacher(id);
+    }
 }

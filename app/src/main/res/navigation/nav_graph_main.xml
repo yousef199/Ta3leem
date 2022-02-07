@@ -19,10 +19,18 @@
             app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_registrationFragment_to_studentMainPage"
-            app:destination="@id/studentMainPage" />
+            app:destination="@id/studentMainPage"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popExitAnim="@anim/to_bottom" />
         <action
             android:id="@+id/action_registrationFragment_to_teacherMainPageFragment"
-            app:destination="@id/teacherMainPageFragment" />
+            app:destination="@id/teacherMainPageFragment"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/adminMainPageFragment"
@@ -32,17 +40,17 @@
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminStudentPageFragment"
             app:destination="@id/adminStudentPageFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminTeacherPage"
             app:destination="@id/adminTeacherPage"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_adminMainPageFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
@@ -111,10 +119,18 @@
             />
         <action
             android:id="@+id/action_studentMainPage_to_studentSubjectsPage"
-            app:destination="@id/studentSubjectsPage" />
+            app:destination="@id/studentSubjectsPage"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_studentMainPage_to_channelFragment"
-            app:destination="@id/channelFragment" />
+            app:destination="@id/channelFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/teacherMainPageFragment"
@@ -144,10 +160,18 @@
             />
         <action
             android:id="@+id/action_teacherMainPageFragment_to_channelFragment"
-            app:destination="@id/channelFragment" />
+            app:destination="@id/channelFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_teacherMainPageFragment_to_teacherClassesPage"
-            app:destination="@id/teacherClassesPage" />
+            app:destination="@id/teacherClassesPage"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/studentSubjectsPage"
@@ -220,21 +244,33 @@
     </fragment>
     <fragment
         android:id="@+id/teacherClassesPage"
-        android:name="com.yousef.ta3leem.ui.UI.Teacher.Fragments.teacherClassesPage"
+        android:name="com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherClassesPage"
         tools:layout="@layout/teacherclassespage"
         android:label="teacherClassesPage" >
         <action
             android:id="@+id/action_teacherClassesPage_to_teacherMainPageFragment"
             app:destination="@id/teacherMainPageFragment" />
+        <action
+            android:id="@+id/action_teacherClassesPage_to_teacherClassMainPage"
+            app:destination="@id/teacherClassMainPage" />
     </fragment>
     <fragment
         android:id="@+id/studentClassPage"
-        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.StudentClassPage"
+        android:name="com.yousef.ta3leem.ui.UI.Student.Fragments.StudentSubjectMainPage"
         tools:layout="@layout/studentclassmainpage"
         android:label="StudentClassPage" >
         <action
             android:id="@+id/action_studentClassPage_to_studentSubjectsPage"
             app:destination="@id/studentSubjectsPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherClassMainPage"
+        android:name="com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherClassMainPage"
+        tools:layout="@layout/teacherclassmainpage"
+        android:label="TeacherClassMainPage" >
+        <action
+            android:id="@+id/action_teacherClassMainPage_to_teacherClassesPage"
+            app:destination="@id/teacherClassesPage" />
     </fragment>
 
 </navigation>

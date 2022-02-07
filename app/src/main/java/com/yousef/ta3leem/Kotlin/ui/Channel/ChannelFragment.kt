@@ -50,11 +50,23 @@ class ChannelFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentChannelBinding.inflate(inflater, container, false)
-        sharedPreferences = requireActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
-        val id  = sharedPreferences.getString("id" , null)
-        val name  = sharedPreferences.getString("name" , null);
-        val image  = sharedPreferences.getString("image" , null);
         val login = args.login
+        var id: String? = ""
+        var name:String? = ""
+        var image:String? = ""
+
+        if(login.equals("student")){
+            sharedPreferences = requireActivity().getSharedPreferences(Constants.STUDENT_SHARED_PREF , Context.MODE_PRIVATE);
+             id  = sharedPreferences.getString("id" , null)
+             name  = sharedPreferences.getString("name" , null);
+             image  = sharedPreferences.getString("image" , null);
+        }
+        else{
+            sharedPreferences = requireActivity().getSharedPreferences(Constants.TEACHER_SHARED_PREF , Context.MODE_PRIVATE);
+            id  = sharedPreferences.getString("id" , null)
+            name  = sharedPreferences.getString("name" , null);
+            image  = sharedPreferences.getString("image" , null);
+        }
 
         setupUser(id , name , image)
         setupChannels()
@@ -74,7 +86,7 @@ class ChannelFragment : Fragment() {
         }
 
         binding.channelListHeaderView.setOnUserAvatarClickListener {
-            binding.drawerLayout.openDrawer(Gravity.START)
+            binding.drawerLayout.openDrawer(Gravity.END)
         }
 
         return binding.root
@@ -153,18 +165,18 @@ class ChannelFragment : Fragment() {
 
     private fun logout(login: String?) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes") { _, _ ->
+        builder.setPositiveButton("نعم") { _, _ ->
             client.disconnect()
             if(login.equals("student")){
                 findNavController().navigate(R.id.action_channelFragment_to_studentMainPage)
             }
             else
                 findNavController().navigate(R.id.action_channelFragment_to_teacherMainPageFragment)
-            showToast("Logged out successfully")
+            showToast("تم العوده بتجاح")
         }
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Logout?")
-        builder.setMessage("Are you sure you want to logout?")
+        builder.setNegativeButton("لا") { _, _ -> }
+        builder.setTitle("الخروج")
+        builder.setMessage("هل متاكد انك تريد العوده للصفحه الرئيسيه؟")
         builder.create().show()
     }
 

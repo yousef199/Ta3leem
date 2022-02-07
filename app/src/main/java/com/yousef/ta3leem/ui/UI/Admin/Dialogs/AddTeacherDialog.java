@@ -106,7 +106,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
                     setError();
                     if (checkFields()){
                         addAllToFireBaseThread();
-                        Toast.makeText(getActivity(),  " بنجاح"+ name + "تم اضافة المدرس ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "تم اضافة المدرس بنجاح"  , Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 }
@@ -313,7 +313,7 @@ public class AddTeacherDialog extends AppCompatDialogFragment {
                 repo.addTeacherFireBase(teacher);
                 for (ClassesSubjects s : classesSubjectsList){
                     repo.addClassAndSubjectsFireBase(id , s);
-                    repo.addClass(s.getClassName() , name , s.getSubjects());
+                    repo.addClass(s.getClassName() , id,name , s.getSubjects());
                 }
             }
         };

@@ -1,5 +1,6 @@
 package com.yousef.ta3leem.ui.UI.Admin.Fragments;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +13,15 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.yousef.ta3leem.Adapters.AdminStudentRecyclerAdapter;
 import com.yousef.ta3leem.Adapters.AdminTeacherRecyclerAdapter;
@@ -30,6 +34,8 @@ import com.yousef.ta3leem.ui.UI.Admin.Dialogs.AddStudentDialog;
 import com.yousef.ta3leem.ui.UI.Admin.ViewModels.AdminStudentViewModel;
 
 import java.util.List;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class AdminStudentPageFragment extends Fragment {
     AdminstudentspageFragmentBinding binding;
@@ -71,6 +77,7 @@ public class AdminStudentPageFragment extends Fragment {
         binding.adminStudentsRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.adminStudentsRecycler.setHasFixedSize(true);
         adapter = new AdminStudentRecyclerAdapter(getActivity());
+        new ItemTouchHelper(itemTouchCallback).attachToRecyclerView(binding.adminStudentsRecycler);
         binding.adminStudentsRecycler.setAdapter(adapter);
     }
 
@@ -108,6 +115,28 @@ public class AdminStudentPageFragment extends Fragment {
             }
         });
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0 , ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            adapter.deleteStudent(viewHolder.getAbsoluteAdapterPosition());
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(getActivity() , R.color.red))
+                    .addSwipeLeftActionIcon(R.drawable.delete_icon)
+                    .create()
+                    .decorate();
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    };
 
     // Create an instance from the addStudentDialog and show it
     private void openAddDialog(){

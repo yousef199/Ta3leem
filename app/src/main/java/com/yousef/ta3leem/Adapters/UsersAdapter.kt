@@ -33,7 +33,7 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.MyViewHolder>() {
         val currentUser = userList[position]
 
         holder.binding.avatarImageView.setUserData(currentUser)
-        holder.binding.usernameTextView.text = currentUser.id
+        holder.binding.usernameTextView.text = currentUser.name
         holder.binding.lastActiveTextView.text = convertDate(currentUser.lastActive!!.time)
         holder.binding.rootLayout.setOnClickListener {
             createNewChannel(currentUser.id, holder)

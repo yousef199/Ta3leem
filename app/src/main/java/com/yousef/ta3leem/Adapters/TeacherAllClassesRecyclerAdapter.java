@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yousef.ta3leem.R;
+import com.yousef.ta3leem.ui.UI.Teacher.Fragments.TeacherClassesPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +75,8 @@ public class TeacherAllClassesRecyclerAdapter extends RecyclerView.Adapter<Teach
     }
 
     public void setClassesAndSubjectsLists(List<String> classesNames, List<String> subjectsNames) {
-//        subjectsNames.clear();
-//        teachersNames.clear();
+        Classes.clear();
+        Subjects.clear();
         for (String s : classesNames) {
             Classes.add(s);
         }
@@ -97,6 +98,14 @@ public class TeacherAllClassesRecyclerAdapter extends RecyclerView.Adapter<Teach
             subjectName = (TextView) itemView.findViewById(R.id.classCardSubjectName);
             className = (TextView) itemView.findViewById(R.id.classCardName);
             enterClass = (Button) itemView.findViewById(R.id.classEnterButton);
+            enterClass = (Button) itemView.findViewById(R.id.classEnterButton);
+
+            enterClass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new TeacherClassesPage.navigation().navigateToClassPage(view);
+                }
+            });
         }
     }
 }

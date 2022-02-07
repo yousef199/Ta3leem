@@ -2,6 +2,7 @@ package com.yousef.ta3leem.Data.FireBase;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesID;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.ClassesSubjects;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Student;
 import com.yousef.ta3leem.Data.FireBase.FireBaseHelper.Teacher;
@@ -32,12 +33,13 @@ public class FireBaseAdd {
             dataBase.setValue(classes.getSubjects());
     }
 
-    public void addNewClass(String className, String Name , List<String> Subjects) {
+    public void addNewClass(String className, String id,String Name , List<String> Subjects) {
         HashMap<String, String> classNameObject = new HashMap<>();
         classNameObject.put("Class Name" , Name);
+        ClassesID classesID = new ClassesID(id , Subjects);
         dataBase = firebaseDatabase.getInstance().getReference(Constants.CLASSES_FIREBASE_NAME).child(className).child(Name);
         dataBase.setValue(classNameObject);
-        dataBase.setValue(Subjects);
+        dataBase.setValue(classesID);
     }
 
 

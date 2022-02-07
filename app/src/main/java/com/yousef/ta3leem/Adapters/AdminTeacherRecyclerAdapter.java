@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeacherRecyclerAdapter.viewHolder> {
     List<Teacher> teacherList = new ArrayList<>();
     Set <Teacher> checkTeacherList = new HashSet<>();
+    Repo repo = new Repo();
     Context context;
     int counter = 1;
 
@@ -50,7 +52,7 @@ public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeach
     //set the value for the elements from the list current element
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         Teacher teacher = teacherList.get(position);
-        if(teacher.getImage().equals("null")){
+        if(teacher.getImage().equals("")){
             Glide.with(context)
                     .load(R.drawable.user_icon)
                     .centerCrop()
@@ -63,6 +65,7 @@ public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeach
                     .into(holder.circleImageView);
 
         holder.textView.setText(teacher.getName());
+        holder.id.setText(teacher.getId());
     }
 
     @Override
@@ -83,16 +86,24 @@ public class AdminTeacherRecyclerAdapter extends RecyclerView.Adapter<AdminTeach
         notifyDataSetChanged();
     }
 
+    public void deleteTeacher(int i){
+        repo.deleteTeacher(teacherList.get(i).getId());
+        notifyDataSetChanged();
+    }
+
+
+
+
     public class viewHolder extends RecyclerView.ViewHolder{
         CircleImageView circleImageView;
-        TextView textView;
+        TextView textView , id;
 
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.recyclerStudentImage);
             textView = itemView.findViewById(R.id.recyclerStudentName);
-
+            id = itemView.findViewById(R.id.recyclerStudentID);
         }
     }
 }

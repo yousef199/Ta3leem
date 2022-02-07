@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,6 +84,7 @@ public class AddStudentDialog extends AppCompatDialogFragment {
                     setError();
                     if (checkFields()){
                         addAllToFireBaseThread();
+                        Toast.makeText(getActivity(), "تم اضافة الطالب بنجاح"  , Toast.LENGTH_SHORT).show();
                         alertDialog.dismiss();
                     }
                 }

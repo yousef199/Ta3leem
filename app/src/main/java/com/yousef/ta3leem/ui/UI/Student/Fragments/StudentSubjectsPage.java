@@ -40,7 +40,6 @@ public class StudentSubjectsPage extends Fragment {
         binding = StudentsubjectspageBinding.inflate(inflater , container , false);
         View view = binding.getRoot();
         viewModel = new ViewModelProvider(this).get(StudentViewModel.class);
-        binding.studentSubjectsToolBar.setNavigationIcon(R.drawable.back_icon);
         return view;
     }
 
@@ -64,8 +63,6 @@ public class StudentSubjectsPage extends Fragment {
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         //Setting the toolbar
         appCompatActivity.setSupportActionBar(binding.studentSubjectsToolBar);
-        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
         binding.studentSubjectsToolBar.setTitleTextAppearance(getActivity() , R.style.semi_bold_text);
         setHasOptionsMenu(true);
     }
@@ -74,17 +71,18 @@ public class StudentSubjectsPage extends Fragment {
         viewModel.observeStudentStudentSubjectPageInfo(className).observe(getViewLifecycleOwner(), new Observer<Map<String, List<String>>>() {
             @Override
             public void onChanged(Map<String, List<String>> stringListMap) {
+                System.out.println("onChanged Called");
                 Map<String , List<String>> m= stringListMap;
-                System.out.println("Size :" + m.size() + "Students");
+                names.clear();
+                subjects.clear();
                 for(Map.Entry<String , List<String>> m2 : m.entrySet()){
                     for(String s:m2.getValue()){
                         names.add(m2.getKey());
                         subjects.add(s);
+                        System.out.println("Teacher Name: " + m2.getKey() + "Subject: " + s);
                     }
                 }
                 adapter.setSubjectsList(subjects , names);
-//                subjects.clear();
-//                names.clear();
             }
         });
     }

@@ -4,7 +4,16 @@ import java.util.List;
 
 public class ClassesSubjects {
     String className;
+    String teacherID;
     List<String> subjects;
+
+    public String getTeacherID() {
+        return teacherID;
+    }
+
+    public void setTeacherID(String teacherID) {
+        this.teacherID = teacherID;
+    }
 
     public ClassesSubjects() {
     }

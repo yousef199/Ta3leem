@@ -28,7 +28,7 @@
                 android:id="@+id/circleImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="225dp"
+                android:layout_marginRight="220dp"
                 app:civ_border_width="1dp"
                 app:civ_border_color="@color/grey"
                 />

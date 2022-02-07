@@ -2,22 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home_Student"
+        android:id="@+id/home_Teacher"
         android:icon="@drawable/bottom_nav_home"
         android:title="الرئيسيه"
         />
     <item
-        android:id="@+id/exams_Student"
+        android:id="@+id/exams_Teacher"
         android:icon="@drawable/bottom_nav_exams"
         android:title="الامتحانات"
         />
+
+    <item android:id="@+id/placeHolder"
+        android:title=""/>
     <item
-        android:id="@+id/classes_Student"
+        android:id="@+id/classes_Teacher"
         android:icon="@drawable/bottom_nav_lectures"
         android:title="الدروس"
         />
     <item
-        android:id="@+id/homework_Student"
+        android:id="@+id/homeWork_Teacher"
         android:icon="@drawable/bottom_nav_homeworks"
         android:title="الواجبات"
         />

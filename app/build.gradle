@@ -50,6 +50,7 @@ apply plugin: 'com.google.gms.google-services'
 dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
     def nav_version = '2.4.0'
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -105,4 +106,10 @@ dependencies {
 
     //Stream Chat
     implementation 'io.getstream:stream-chat-android-ui-components:4.25.0'
+
+    //FAB
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+
+    //swipe gesture drawer
+    implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.3'
 }
